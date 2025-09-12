@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 6rem;
+}
+
+.img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+}

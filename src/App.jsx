@@ -6,8 +6,9 @@ import Logo from "./components/logo/Logo";
 import Dashboard from "./pages/Dashboard";
 import Invoices from "./pages/Invoices";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
-
+import './App.css'
 function App() {
   return (
     <>
@@ -19,7 +20,8 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route index element={<Dashboard />}></Route>
           </Route>
-          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/auth/signup" element={<Signup/>}></Route>
+          <Route path="/auth/login" element={<Login/>}></Route>
           <Route path="/invoices" element={<ProtectedRoute />}>
             <Route index element={<Invoices />}></Route>
           </Route>

@@ -15,7 +15,6 @@ export default function Login() {
   const [login] = useLoginMutation();
   const token = useSelector((state) => state.auth.token);
 
-
   useEffect(() => {
     if (token) {
       navigate('/dashboard');
@@ -35,6 +34,7 @@ export default function Login() {
     try {
       const data = await login(formData).unwrap();
       dispatch(setCredentials(data));
+      console.log('userID',user)
       navigate('/dashboard');
       
     } catch (err) {

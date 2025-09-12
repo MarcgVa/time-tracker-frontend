@@ -36,7 +36,7 @@ export default function NavBar() {
           <div>
             <button
               className="oval-button"
-              onClick={dispatch(logout)}
+              onClick={()=>dispatch(logout())}
             >Logout</button>
           </div>
         </div>

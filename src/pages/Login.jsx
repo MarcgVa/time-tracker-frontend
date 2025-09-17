@@ -34,7 +34,6 @@ export default function Login() {
     try {
       const data = await login(formData).unwrap();
       dispatch(setCredentials(data));
-      console.log('userID',user)
       navigate('/dashboard');
       
     } catch (err) {
@@ -66,7 +65,7 @@ export default function Login() {
           />
 
           <div>
-            <button className="authBtn">Login</button>
+            <button type='submit' className="authBtn">Login</button>
           </div>
           <p className="">
             Need an account?{" "}

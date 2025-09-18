@@ -9,7 +9,8 @@ export default function Invoices() {
   const [createInvoice] = useCreateInvoiceMutation();
 
   const handleCreate = async (projectId) => {
-    await createInvoice(projectId);
+    console.log(projectId);
+    await createInvoice({'projectId': projectId}).unwrap();
   }
 
   return (

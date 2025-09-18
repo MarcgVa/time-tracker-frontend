@@ -17,10 +17,10 @@ export const invoicesApi = api.injectEndpoints({
       providesTags: ["Invoices"],
     }),
     createInvoice: builder.mutation({
-      query: (payload) => ({
+      query: (projectId) => ({
         url: "/invoice",
         method: "POST",
-        body: { payload },
+        body: projectId,
       }),
       invalidatesTags: ["Invoices"],
     }),

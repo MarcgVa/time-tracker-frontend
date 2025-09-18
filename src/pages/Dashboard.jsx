@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCreateProjectMutation, useGetProjectsQuery } from '../features/projects/projectsApi'; 
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
-  const { data: projects = [], isLoading } = useGetProjectsQuery();
+  const token = useSelector((state) => state.auth.token);
+  const { status, data, isLoading } = useGetProjectsQuery();
   const [createProject] = useCreateProjectMutation();
+  const [projects, setProjects] = useState();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    hourlyRate: 0,
+    hourlyRate: 0
   });
+
+  useEffect(() => {
+    if (status == 'fulfilled') {
+      setProjects(data);
+    };
+  }), [status, data];
+
 
   const handleUpdate = (e) => {
     setFormData((prev) => ({
@@ -36,18 +46,21 @@ export default function Dashboard() {
           placeholder="Project Name"
           onChange={handleUpdate}
           className="border m-4 rounded"
+          name='name'
         />
         <input
           type="text"
           placeholder="Description"
           onChange={handleUpdate}
           className="border m-4 rounded"
+          name='description'
         />
         <input
           type="number"
           placeholder="Hourly Rate"
           onChange={handleUpdate}
           className="border m-4 rounded"
+          name='hourlyRate'
         />
 
         <button className="bg-green-600 text-white px-4 rounded">Add</button>
@@ -58,7 +71,7 @@ export default function Dashboard() {
           <p>Loading projects</p>
         ) : (
           <ul>
-            {projects.map((p) => (
+            {projects?.map((p) => (
               <li key={p.id} className="proj-list">
                 <a href={`/projects/${p.id}`} className="font-bold ">
                   {p.name}

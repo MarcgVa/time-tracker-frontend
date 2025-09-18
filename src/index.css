@@ -1,3 +1,8 @@
+@import "tailwind/preflight";
+@tailwind utilities;
+
+body { @apply bg-gray-50 text-gray-900; }
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

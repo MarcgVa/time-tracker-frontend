@@ -10,7 +10,7 @@ export const timeEntriesApi = api.injectEndpoints({
       query: ({ projectId, notes }) => ({
         url: `/projects/${projectId}/time-entries`,
         method: "POST",
-        body: { notes },
+        body: notes,
       }),
       invalidatesTags: ["TimeEntries"],
     }),

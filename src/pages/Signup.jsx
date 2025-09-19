@@ -1,27 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useSignupMutation } from '../features/auth/authApi';
-import { setCredentials } from '../features/auth/authSlice'; 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useSignupMutation } from "../features/auth/authApi";
+import { setCredentials } from "../features/auth/authSlice";
+import DarkLogo from "../assets/img/logos/TimeTrackerLogo-bgDark.jpg";
+import LightLogo from "../assets/img/logos/TimeTrackerLogo.jpg";
 
 export default function Signup() {
   const [signup, error] = useSignupMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   useEffect(() => {
     if (token) {
       navigate("/dashboard");
     }
-  }), [token, navigate];
-  
+  }),
+    [token, navigate];
+
   const handleUpdate = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -29,57 +32,133 @@ export default function Signup() {
     }));
   };
 
-  const handleSubmit = async (e) => { 
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData)
+      console.log(formData);
       const data = await signup(formData).unwrap();
       dispatch(setCredentials(data));
-      navigate('/dashboard');
-      
+      navigate("/dashboard");
     } catch (err) {
       //TODO:: Add Toast Notification for failure
       console.error("Signup failed", err);
     }
   };
 
-
-
   return (
-    <div className="form-content">
-      <div>
-        <h1 className="">Sign Up</h1>
+    <>
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-40">
+          <img
+            alt="mgworks.studio's Time Tracker Logo"
+            src={LightLogo}
+            className="mx-auto size-30 w-auto dark:hidden"
+          />
+
+          <img
+            alt="mgworks.studio's Time Tracker Logo"
+            src={DarkLogo}
+            className="mx-auto size-40 w-auto not-dark:hidden"
+          />
+          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            Register
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm/6 font-medium text-gray-900 dark:text-gray-100"
+              >
+                Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  onChange={handleUpdate}
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-900 dark:text-gray-100"
+              >
+                Email Address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  required
+                  autoComplete="email"
+                  onChange={handleUpdate}
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm/6 font-medium text-gray-900 dark:text-gray-100"
+                >
+                  Password
+                </label>
+                <div className="test-sm hidden">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-400 dark:hover:text-indigo-300"
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  autoComplete="current-password"
+                  onChange={handleUpdate}
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm/6 font-semibold dark:text-white shadow-xs bg-indigo-600 
+                hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 
+                dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 cursor-pointer"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+          <p className="mt-10 text-center test-sm/6 text-gray-500 dark:text-gray-400">
+            Already have an account?{" "}
+            <a
+              href="/auth/login"
+              className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              SignIn
+            </a>
+          </p>
+        </div>
       </div>
-      <form onSubmit={handleSubmit} className="">
-        <input
-          name="name"
-          type="text"
-          placeholder="Name"
-          onChange={handleUpdate}
-          className="form-input"
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={handleUpdate}
-          className="form-input"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleUpdate}
-          className="form-input"
-        />
-        <button className="authBtn">Sign Up</button>
-        <p className="">
-          Already have an account?{" "}
-          <a href="/auth/login" className="">
-            Login
-          </a>
-        </p>
-      </form>
-    </div>
+    </>
   );
 }

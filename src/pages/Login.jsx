@@ -3,6 +3,8 @@ import { useLoginMutation } from "../features/auth/authApi";
 import { setCredentials } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import DarkLogo from '../assets/img/logos/TimeTrackerLogo-bgDark.jpg';
+import LightLogo from '../assets/img/logos/TimeTrackerLogo.jpg'
 
 
 export default function Login() {
@@ -14,7 +16,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   const token = useSelector((state) => state.auth.token);
-
 
   useEffect(() => {
     if (token) {
@@ -44,38 +45,93 @@ export default function Login() {
 
 
   return (
-    <div className="form-content">
-      <div>
-        <h1>Login</h1>
-      </div>
-      <div className="form-content">
-        <form onSubmit={handleSubmit}>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={handleUpdate}
-            className="form-input"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleUpdate}
-            className="form-input"
+    <>
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-40">
+          <img
+            alt="mgworks.studio's Time Tracker Logo"
+            src={LightLogo}
+            className="mx-auto size-30 w-auto dark:hidden"
           />
 
-          <div>
-            <button className="authBtn">Login</button>
-          </div>
-          <p className="">
-            Need an account?{" "}
-            <a href="/auth/signup" className="">
-              Sign Up
-            </a>
+          <img
+            alt="mgworks.studio's Time Tracker Logo"
+            src={DarkLogo}
+            className="mx-auto size-40 w-auto not-dark:hidden"
+          />
+          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            Login
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-900 dark:text-gray-100"
+              >
+                Email Address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  required
+                  autoComplete="email"
+                  onChange={handleUpdate}
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm/6 font-medium text-gray-900 dark:text-gray-100"
+                >
+                  Password
+                </label>
+                <div className="test-sm hidden">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-400 dark:hover:text-indigo-300"
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  autoComplete="current-password"
+                  onChange={handleUpdate}
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 cursor-pointer"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+          <p className="mt-10 text-center test-sm/6 text-gray-500 dark:text-gray-400">
+            Need an account?{' '}
+            <a href="/auth/signup"
+            className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">SignUp</a>
           </p>
-        </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

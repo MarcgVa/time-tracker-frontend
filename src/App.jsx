@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import NavBar from "./components/navbar/NavBar";
+import NavBar from "./components/NavBar";
 import Layout from "./components/Layout";
-import Logo from "./components/logo/Logo";
 import Dashboard from "./pages/Dashboard";
 import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
@@ -17,7 +16,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route element={<Layout />}></Route>
-          <Route index element={<Logo />}></Route>
+          <Route index element={<Login />}></Route>
           <Route path="/auth/signup" element={<Signup />}></Route>
           <Route path="/auth/login" element={<Login />}></Route>
 

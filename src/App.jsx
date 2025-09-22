@@ -17,8 +17,8 @@ function App() {
         <Routes>
           <Route element={<Layout />}></Route>
           <Route index element={<Login />}></Route>
-          <Route path="/auth/signup" element={<Signup />}></Route>
-          <Route path="/auth/login" element={<Login />}></Route>
+          <Route path="/auth/:form" element={<Login />}></Route>
+          <Route path="/auth/:form" element={<Signup />}></Route>
 
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />

@@ -68,9 +68,9 @@ export default function ProjectDetail() {
     <>
       <div className="flex px-6 py-12 lg:px-8 flex-col ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-widest text-gray-900 dark:text-indigo-500">
+          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-widest text-indigo-900 dark:text-indigo-500">
             Project:
-            <span className="px-5 dark:text-gray-300">{project?.name}</span>
+            <span className="px-5 text-gray700 dark:text-gray-300">{project?.name}</span>
           </h2>
         </div>
 
@@ -89,26 +89,29 @@ export default function ProjectDetail() {
               isLoading={false}
               onClick={handleStart}
               type="submit"
-              className="mx-2 px-3 py-1 rounded-md bg-emerald-800 text-gray-300 dark:hover:text-indigo-400 disabled:opacity-50"
+              className="mx-2 px-3 py-1 rounded-xl bg-emerald-800 text-gray-300 dark:hover:text-indigo-400 disabled:opacity-50"
               title="Start Timer"
               disabled={!buttonDisabled}
             />
-          <div className="inline-block">
-             <Button
-                        isLoading={false}
-                        disabled={buttonDisabled}
-                        onClick={() => handleStop(entryId)}
-                        type="button"
-                        className=" mx-2 px-3 py-1 rounded-md bg-red-800 text-gray-300 dark:hover:text-red-400 disabled:opacity-50"
-                        title="Stop"
-                      />
-          </div>
+            <div className="inline-block">
+              <Button
+                isLoading={false}
+                disabled={buttonDisabled}
+                onClick={() => handleStop(entryId)}
+                type="button"
+                className=" mx-2 px-3 py-1 rounded-xl bg-red-800 text-gray-300 dark:hover:text-red-400 disabled:opacity-50"
+                title="Stop"
+              />
+            </div>
           </form>
         </div>
 
-        <div className="flex mx-2 my-4 px-6 py-4 lg:px-8 flex-col text-gray-900 dark:text-gray-400 border dark:border-gray-600 border-gray-900 rounded-md ">
-          <h3 className="mb-4 text-indigo-500 text-xl/9 text-center font-bold">Time submissions</h3>
-          {isLoading ? (<p>Loading time submissions</p>
+        <div className="">
+          <h3 className="mb-10 mt-20 text-indigo-500 text-2xl/9 tracking-wide text-center font-bold">
+            Time Submissions
+          </h3>
+          {isLoading ? (
+            <p>Loading time submissions</p>
           ) : (
             <DataTable columns={COLUMNS} data={entries || []} />
           )}

@@ -27,7 +27,7 @@ export default function Dashboard() {
         </div>
         <NewProject />
 
-        <div className="mt-10 sm:mx-auto sm:w-full">
+        <div className="mt-10 sm:mx-auto sm:w-full border dark:border-gray-600 border-gray-900">
           {isLoading && projects?.length == 0 ? (
             <p>Loading projects</p>
           ) : (

@@ -95,7 +95,7 @@ export default function ProjectDetail() {
                 id="notes"
                 name="notes"
                 type="text"
-                placeholder="Task Title"
+                placeholder="Task Title - be descriptive"
                 onChange={handleUpdate}
                 className="mx-2 px-4 py-1 w-full sm:w-full md:w-2xl lg:w-3xl placeholder:text-gray-600 text-sm text-gray-900 dark:text-gray-400
               border border-gray-900 dark:border-gray-600 rounded-md"

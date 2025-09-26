@@ -7,20 +7,28 @@ import DataTable from "../components/DataTable";
 import Button from "../components/Button";
 import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING } from "../utils/commonStyles";
 import { useState, useEffect } from "react";
-//TODO::Finish page layout
+import { useDispatch } from 'react-redux';
+import { setInvoice } from  "../routes/invoices/invoiceSlice"
+import { useNavigate } from "react-router-dom";
+
+
+
 
 export default function Invoices() {
-  const COLUMNS = ["id", "projectName", "createdAt", "issuedAt", "total"];
+  const COLUMNS = ["projectName", "createdAt", "issuedAt", "total", "actions"];
   const { status: invStatus, data, isLoading } = useGetInvoicesQuery();
   const [invoices, setInvoices] = useState([]);
   const {data: projects = [] } = useGetProjectsQuery();
   const [createInvoice] = useCreateInvoiceMutation();
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (invStatus == "fulfilled") {
       setInvoices(data);
     }
   }, [invStatus, data]);
+  
   const handleCreate = async (projectId) => {
     try {
       await createInvoice({ projectId: projectId }).unwrap();
@@ -29,6 +37,12 @@ export default function Invoices() {
     }
   };
 
+  const handleOnClick = (inv) => {
+    dispatch(setInvoice(inv));
+    navigate(`/invoices/${inv.id}`);
+  } 
+
+
   // Adding project name and updating the dateTime string to a more readable format
   const invoiceList = invoices?.map((inv) => ({
     id: inv.id,
@@ -36,6 +50,14 @@ export default function Invoices() {
     projectName: inv.project.name,
     createdAt: new Date(inv.createdAt).toLocaleDateString(),
     issuedAt: new Date(inv.issuedAt).toLocaleDateString(),
+    actions: (
+      <Button
+        title="View"
+        type="button" 
+        className="cursor-pointer px-5 py-1 rounded-xl bg-indigo-500 text-indigo-200"
+        onClick={()=>handleOnClick(inv)}
+      />
+    ),
   }));
 
 

@@ -37,7 +37,7 @@ export default function DataTable({columns=[], data=[]}) {
                       className="min-w-full flex-row justify-evenly px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-300"
                       key={col}
                     >
-                      <a href={`/projects/${row.id}`} className='cursor-pointer'>{row[col]}</a>
+                      {row[col]}
                     </td>
                   ))}
                 </tr>

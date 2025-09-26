@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from '../assets/img/logos/TimeTrackerLogo-bgDark-400.png'
 import { useDispatch } from "react-redux";
-import { logout } from '../features/auth/authSlice';
+import { logout } from '../routes/auth/authSlice';
 
 export default function NavBar() {
   const dispatch = useDispatch();

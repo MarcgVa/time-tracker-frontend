@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useLoginMutation } from "../features/auth/authApi";
-import { setCredentials } from "../features/auth/authSlice";
+import { useLoginMutation } from "../routes/auth/authApi";
+import { setCredentials } from "../routes/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DarkLogo from '../assets/img/logos/TimeTrackerLogo-bgDark.jpg';

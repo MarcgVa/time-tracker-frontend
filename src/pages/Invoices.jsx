@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
 import {
   useCreateInvoiceMutation,
   useGetInvoicesQuery,
-} from "../features/invoices/invoicesApi";
-import { useGetProjectsQuery } from "../features/projects/projectsApi";
+} from "../routes/invoices/invoicesApi";
+import { useGetProjectsQuery } from "../routes/projects/projectsApi";
 import DataTable from "../components/DataTable";
 import Button from "../components/Button";
-
+import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING } from "../utils/commonStyles";
+import { useState, useEffect } from "react";
 //TODO::Finish page layout
 
-
 export default function Invoices() {
-  const COLUMNS = ["id", "projectName", "createdAt","issuedAt","total"];
-  const boxTitleStyle = "absolute top-0 left-10 bg-gray-400 font-semibold mb-5 text-center text-sm text-gray-950 rounded-xl px-3 py-1 -mt-4 dark:border-shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300";
-  const { data: invoices = [], isLoading } = useGetInvoicesQuery();
-  const { data: projects = [] } = useGetProjectsQuery();
+  const COLUMNS = ["id", "projectName", "createdAt", "issuedAt", "total"];
+  const { status: invStatus, data, isLoading } = useGetInvoicesQuery();
+  const [invoices, setInvoices] = useState([]);
+  const {data: projects = [] } = useGetProjectsQuery();
   const [createInvoice] = useCreateInvoiceMutation();
   
-
-
-
+  useEffect(() => {
+    if (invStatus == "fulfilled") {
+      setInvoices(data);
+    }
+  }, [invStatus, data]);
   const handleCreate = async (projectId) => {
     try {
       await createInvoice({ projectId: projectId }).unwrap();
@@ -28,12 +29,13 @@ export default function Invoices() {
     }
   };
 
+  // Adding project name and updating the dateTime string to a more readable format
   const invoiceList = invoices?.map((inv) => ({
     id: inv.id,
     total: `$${inv.total}`,
     projectName: inv.project.name,
     createdAt: new Date(inv.createdAt).toLocaleDateString(),
-    issuedAt: new Date(inv.issuedAt).toLocaleDateString(),  
+    issuedAt: new Date(inv.issuedAt).toLocaleDateString(),
   }));
 
 
@@ -46,11 +48,9 @@ export default function Invoices() {
           </h2>
         </div>
 
-        <div className="relative sm:mx-auto w-full mx-2 mb-10 p-2 border dark:border-gray-600 border-gray-900 rounded-lg bg-zinc-400">
+        <div className={BOX_CONTAINER_STYLING}>
           <div className="w-full ">
-            <h2 className={boxTitleStyle}>
-              Create New Invoice
-            </h2>
+            <h2 className={BOX_TITLE_STYLING}>Create New Invoice</h2>
           </div>
           <div className="mt-10 ">
             <ul className="mb-6 col-auto flex gap-3 flex-wrap px-5">
@@ -67,11 +67,9 @@ export default function Invoices() {
           </div>
         </div>
 
-        <div className="relative sm:mx-auto w-full mx-2 p-2 border dark:border-gray-600 border-gray-900 rounded-lg bg-zinc-200 dark:bg-zinc-400">
+        <div className={BOX_CONTAINER_STYLING}>
           <div className="mb-6">
-            <h2 className={boxTitleStyle}>
-              Existing Invoices
-            </h2>
+            <h2 className={BOX_TITLE_STYLING}>Existing Invoices</h2>
           </div>
           <div className="mt-5 p-2 rounded-lg">
             {isLoading && invoices?.length == 0 ? (

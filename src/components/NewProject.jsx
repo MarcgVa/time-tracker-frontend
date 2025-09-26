@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCreateProjectMutation } from "../features/projects/projectsApi";
+import { useCreateProjectMutation } from "../routes/projects/projectsApi";
 import Button from "./Button";
 
 export default function NewProject() {

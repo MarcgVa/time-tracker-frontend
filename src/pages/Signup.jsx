@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useSignupMutation } from "../features/auth/authApi";
-import { setCredentials } from "../features/auth/authSlice";
+import { useSignupMutation } from "../routes/auth/authApi";
+import { setCredentials } from "../routes/auth/authSlice";
 import DarkLogo from "../assets/img/logos/TimeTrackerLogo-bgDark.jpg";
 import LightLogo from "../assets/img/logos/TimeTrackerLogo.jpg";
 import Button from "../components/Button";

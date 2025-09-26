@@ -7,6 +7,7 @@ import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import InvoiceDetails from "./pages/InvoiceDetails";
 import './App.css'
 
 
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/invoices" element={<ProtectedRoute />}>
             <Route path="/invoices" element={<Invoices />} />
+          </Route>
+          <Route path="/invoices/:id" element={<ProtectedRoute />}>
+            <Route path="/invoices/:id" element={<InvoiceDetails />} />
           </Route>
           <Route path="/projects/:id" element={<ProtectedRoute />}>
             <Route path="/projects/:id" element={<ProjectDetails />} />

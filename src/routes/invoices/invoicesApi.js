@@ -16,6 +16,13 @@ export const invoicesApi = api.injectEndpoints({
       }),
       providesTags: ["Invoices"],
     }),
+    getInvoiceDetails: builder.query({
+      query: (id) => ({
+        url: `/invoice/${id}/details`,
+        method: 'GET',
+      }),
+      providesTags: ["Invoices"],
+    }),
     createInvoice: builder.mutation({
       query: (projectId) => ({
         url: "/invoice",
@@ -26,7 +33,7 @@ export const invoicesApi = api.injectEndpoints({
     }),
     deleteInvoice: builder.mutation({
       query: (id) => ({
-        url: `/invoice/${id}`,
+        url: `/invoice/${id}/delete`,
         method: 'DELETE',
       }),
       invalidatesTags: ["Invoices"],
@@ -34,4 +41,4 @@ export const invoicesApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetInvoicesQuery, useCreateInvoiceMutation } = invoicesApi;
+export const { useGetInvoicesQuery, useCreateInvoiceMutation, useGetInvoiceDetailsQuery } = invoicesApi;

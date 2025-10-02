@@ -19,9 +19,9 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
-      navigate('/dashboard');
-    }  
-  }), [token, navigate];
+      navigate("/dashboard");
+    }
+  }, [token, navigate]);
 
 
   const handleUpdate = (e) => {

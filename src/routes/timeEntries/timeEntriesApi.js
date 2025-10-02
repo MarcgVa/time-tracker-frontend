@@ -3,7 +3,7 @@ import { api } from "../../app/api";
 export const timeEntriesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getTimeEntries: builder.query({
-      query: (projectId) => `/projects/${projectId}/times`,
+      query: (id) => `/projects/${id}/times`,
       providesTags: ["TimeEntries"],
     }),
     startTimer: builder.mutation({

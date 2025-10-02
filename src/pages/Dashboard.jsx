@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useGetProjectsQuery } from "../routes/projects/projectsApi";
-import DataTable from "../components/DataTable";
+import DataTable from "../components/shared/DataTable";
 import NewProject from "../components/NewProject";
+import PageTitle from "../components/shared/PageTitle";
 
 export default function Dashboard() {
   const columns = ["name", "description", "hourlyRate", "actions"];
@@ -29,15 +30,9 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex min-h-10 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-widest text-gray-900 dark:text-gray-300">
-            Project Dashboard
-          </h2>
-        </div>
-
-        <div>
-          <NewProject />
-        </div>
+        <PageTitle title='Project Dashboard' /> 
+        
+        <NewProject />
 
         <div className="mt-10 sm:mx-auto sm:w-full border dark:border-gray-600 border-gray-900">
           {isLoading && projects?.length == 0 ? (

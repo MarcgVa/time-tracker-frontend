@@ -5,58 +5,43 @@ import { useSignupMutation } from "../routes/auth/authApi";
 import { setCredentials } from "../routes/auth/authSlice";
 import DarkLogo from "../assets/img/logos/TimeTrackerLogo-bgDark.jpg";
 import LightLogo from "../assets/img/logos/TimeTrackerLogo.jpg";
-import Button from "../components/Button";
+import Button from "../components/shared/Button";
+import { validateEmail, passwordStrength } from "../utils/validation";
+import PageTitle from "../components/shared/PageTitle";
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordStrength = (password) => {
-  let score = 0;
-  if (password.length >= 8) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[a-z]/.test(password)) score++;
-  if (/[0-9]/.test(password)) score++;
-  if (/[^A-Za-z0-9]/.test(password)) score++;
-  if (score <= 2) return "Weak";
-  if (score === 3 || score === 4) return "Medium";
-  return "Strong";
-};
 
 export default function Signup() {
   const [signup] = useSignupMutation();
   const navigate = useNavigate();
-  const[name, setName] = useState("");
-  const[email, setEmail] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
   const token = useSelector((state) => state.auth.token);
+  const validEmail = formData.email.length > 0 ? validateEmail(formData.email) : true;
 
   useEffect(() => {
     if (token) {
       navigate("/dashboard");
     }
-  }),
-    [token, navigate];
+  },[token, navigate]);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setEmailValid(emailRegex.test(e.target.value));
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       
-      const data = await signup({name,email,password}).unwrap();
+      const data = await signup(formData).unwrap();
       dispatch(setCredentials(data));
       navigate("/dashboard");
     } catch (err) {
@@ -80,9 +65,8 @@ export default function Signup() {
             src={DarkLogo}
             className="mx-auto size-40 w-auto not-dark:hidden"
           />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Register
-          </h2>
+
+          <PageTitle title="Register" />
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -99,10 +83,9 @@ export default function Signup() {
                   id="name"
                   name="name"
                   type="text"
-                  value={name}
                   required
                   autoComplete="name"
-                  onChange={handleNameChange}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
                 />
               </div>
@@ -122,11 +105,10 @@ export default function Signup() {
                   type="text"
                   required
                   autoComplete="email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  onChange={handleChange}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
                 />
-                {!emailValid && (
+                { !validEmail && (
                   <div style={{ color: "red", fontSize: 12 }}>
                     Invalid email format
                   </div>
@@ -157,10 +139,9 @@ export default function Signup() {
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    value={password}
                     required
                     autoComplete="current-password"
-                    onChange={handlePasswordChange}
+                    onChange={handleChange}
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
                   />
                 </div>
@@ -177,19 +158,19 @@ export default function Signup() {
                   />
                 </div>
               </div>
-              {password && (
+              {formData.password && (
                 <div
                   style={{
                     fontSize: 12,
                     color:
-                      passwordStrength(password) === "Strong"
+                      passwordStrength(formData.password) === "Strong"
                         ? "green"
-                        : passwordStrength(password) === "Medium"
+                        : passwordStrength(formData.password) === "Medium"
                         ? "orange"
                         : "red",
                   }}
                 >
-                  Strength: {passwordStrength(password)}
+                  Strength: {passwordStrength(formData.password)}
                 </div>
               )}
             </div>

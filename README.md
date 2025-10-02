@@ -23,7 +23,7 @@ The goal: give freelancers a clean, powerful way to **track billable hours** and
 ---
 
 ## 🏗️ Project Structure
-
+```
   frontend/
   ├─ src/
   │ ├─ app/
@@ -40,7 +40,7 @@ The goal: give freelancers a clean, powerful way to **track billable hours** and
   │ ├─ favicon.ico
   │ └─ logo.png
   └─ package.json
-
+```
 
 ---
 

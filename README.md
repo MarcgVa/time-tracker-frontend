@@ -1,6 +1,6 @@
 # ⏱️ Project Time Tracker – Frontend
 
-A modern, full-stack **Freelancer Time Tracker & Invoicing App** built with **React, Redux Toolkit, RTK Query, Prisma, PostgreSQL, Node.js, and Tailwind CSS**.  
+A modern, full-stack **Project Time Tracker & Invoicing App** built with **React, Redux Toolkit, RTK Query, Prisma, PostgreSQL, Node.js, and Tailwind CSS**.  
 This is the **frontend** codebase.
 
 The goal: give freelancers a clean, powerful way to **track billable hours** and **generate invoices** — all in one intuitive dashboard.

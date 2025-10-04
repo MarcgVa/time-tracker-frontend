@@ -1,7 +1,7 @@
 import React from 'react'
 
   
-export default function Button({ isLoading, disabled, onClick, title, type = 'button', className }) {
+export default function Button({ isLoading = false, disabled, onClick, title, type = 'button', className }) {
   return (
     <>
       <button

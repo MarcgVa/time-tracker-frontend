@@ -4,6 +4,7 @@ import DataTable from "../components/shared/DataTable";
 import NewProject from "../components/NewProject";
 import PageTitle from "../components/shared/PageTitle";
 
+
 export default function Dashboard() {
   const columns = ["name", "description", "hourlyRate", "actions"];
   const { status, data, isLoading } = useGetProjectsQuery();

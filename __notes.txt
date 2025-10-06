@@ -4,18 +4,24 @@ Possible Enhancements:
 2. Give invoices a more realistic look.
 3. Download invoice into PDF
 4. Create a folder structure so that you can organize projects.
-5. Add a sidebar tree structure option when navigating the folder structure
-6. Create a user profile.
-7. e-transactions
+  a. Maybe a sidebar tree structure option when navigating the folder structure
+5. Create a user profile.
+6. e-transactions
   a. Allow electronic submission of invoices to companies. (email and direct submission if available).
   b. Allow for e-payments of invoices
   c. Use plaid for secure bank account connection
-  d. Can we monitor email account for confirmation of payment?
+  d. Automatically update invoice status when payment is received
+    a. Can we monitor email account for confirmation of payment?
+    b. Does Plaid provide a status when payment is received?
+7. Alert when an invoice payment is overdue
+8. Google and Apple login options
+9. Create a company persona allowing companies to dashboard view into all their invoices.
+
 
 
 
 
 Questions:
 1. is it possible to make starting a timer easier?
-    a. Can we create a vscode extension that allows the use of hotkeys to start and stop?
-        i.  How can we detect what project they are working on? config file?
+  a. Can we create a vscode extension that allows the use of hotkeys to start and stop?
+    i.  How can we detect what project they are working on? config file?

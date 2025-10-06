@@ -139,6 +139,14 @@ function InvoiceSummary({ projectId }) {
     }
   }),
     [entryStatus, entryData];
+  
+  
+  const entryList = entries?.map((item) => ({
+    id: item.id,
+    notes: item.notes,
+    startTime: new Date(item.startTime).toLocaleString(),
+    endTime: new Date(item.endTime).toLocaleString(),
+  }));
 
   return (
     <div className="flex sm:mx-auto sm:w-full sm:max-w-6xl p-6 lg:px-8">
@@ -150,7 +158,7 @@ function InvoiceSummary({ projectId }) {
           {isLoading ? (
             <p>Loading time submissions</p>
           ) : (
-            <DataTable columns={columns} data={entries || []} />
+            <DataTable columns={columns} data={entryList || []} />
           )}
         </div>
       </div>

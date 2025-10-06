@@ -30,16 +30,27 @@ export default function Invoices() {
 
 
 function NewInvoice() {
-  const { data: projects = [] } = useGetProjectsQuery();
+  const { status, data=[]} = useGetProjectsQuery();
   const [createInvoice] = useCreateInvoiceMutation();
+  const [projects, setProjects] = useState([]);
+
+
+  useEffect(() => {
+    if (status == "fulfilled") {
+      setProjects(data?.filter((proj) => proj.timeEntries.some((e) => e.invoice == null)));
+    }
+  },[status, data])
 
   const handleCreate = async (projectId) => {
     try {
       await createInvoice({ projectId: projectId }).unwrap();
+      setProjects(
+        projects?.filter((proj) => proj.id != projectId && proj.timeEntries.some((e) => e.invoice == null)));
     } catch (err) {
       console.error("Failed to create the invoice: ", err);
     }
   };
+
 
   return (
     <div className="flex mt-10 min-h-10 flex-col justify-center px-6 lg:px-8">
@@ -49,7 +60,8 @@ function NewInvoice() {
         </div>
         <div className="mt-10 ">
           <ul className="mb-6 col-auto flex gap-3 flex-wrap px-5">
-            {projects.map((p) => (
+            {projects.length === 0 ? ( <p>No new tasks to invoice.</p>):
+              (projects.map((p) => (
               <li key={p.id}>
                 <Button
                   onClick={() => handleCreate(p.id)}
@@ -57,7 +69,7 @@ function NewInvoice() {
                   title={p.name}
                 />
               </li>
-            ))}
+            )))}
           </ul>
         </div>
       </div>

@@ -1,21 +1,25 @@
 Possible Enhancements:
-1. Load new projects into Cards
-  a. Add more details (company info, POC, etc.)
-2. Give invoices a more realistic look.
-3. Download invoice into PDF
-4. Create a folder structure so that you can organize projects.
-  a. Maybe a sidebar tree structure option when navigating the folder structure
-5. Create a user profile.
-6. e-transactions
-  a. Allow electronic submission of invoices to companies. (email and direct submission if available).
-  b. Allow for e-payments of invoices
-  c. Use plaid for secure bank account connection
-  d. Automatically update invoice status when payment is received
-    a. Can we monitor email account for confirmation of payment?
-    b. Does Plaid provide a status when payment is received?
-7. Alert when an invoice payment is overdue
-8. Google and Apple login options
-9. Create a company persona allowing companies to dashboard view into all their invoices.
+- Load new projects into Cards
+  >. Add more details (company info, POC, etc.)
+- Give invoices a more realistic look.
+- Download invoice into PDF
+- Create a folder structure so that you can organize projects.
+  > Maybe a sidebar tree structure option when navigating the folder structure
+- Create a user profile.
+- e-transactions
+  > Allow electronic submission of invoices to companies. (email and direct submission if available).
+  > Allow for e-payments of invoices
+  > Use plaid for secure bank account connection
+  > Automatically update invoice status when payment is received
+    > Can we monitor email account for confirmation of payment?
+    > Does Plaid provide a status when payment is received?
+- Alert when an invoice payment is overdue
+- Google and Apple login options
+- Create a company persona allowing companies to dashboard view into all their invoices.
+- Create filters
+  > Project Details - be able to filter active and inactive tasks
+  > Invoice finished tasks and invoiced tasks can be filtered out
+  > Dashboard - filter on active, inactive, and completed projects 
 
 
 
@@ -25,3 +29,9 @@ Questions:
 1. is it possible to make starting a timer easier?
   a. Can we create a vscode extension that allows the use of hotkeys to start and stop?
     i.  How can we detect what project they are working on? config file?
+
+
+//TODO::Add functionality to issue invoice if not issued yet
+//TODO::Add total hours and rate per hour to the summary section
+//TODO::Add PDF generation and download functionality
+//TODO::Add "Mark as Paid" functionality

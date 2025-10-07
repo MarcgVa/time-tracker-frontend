@@ -1,11 +1,7 @@
 import React,{ useState } from "react";
 import { useCreateProjectMutation } from "../routes/projects/projectsApi";
 import Button from "./shared/Button";
-import {
-  BOX_CONTAINER_STYLING,
-  BOX_TITLE_STYLING,
-  INPUT_STYLING,
-} from "../utils/commonStyles";
+import { BOX_CONTAINER_STYLING, BOX_TITLE_STYLING, INPUT_STYLING } from "../utils/commonStyles";
 
 export default function NewProject() {
   const [createProject] = useCreateProjectMutation();
@@ -27,7 +23,7 @@ export default function NewProject() {
     try {
       await createProject(formData).unwrap();
     } catch (err) {
-      console.error("Sign failed", err);
+      console.error(err);
     }
   };
 
@@ -64,7 +60,7 @@ export default function NewProject() {
                   className={INPUT_STYLING}
                 />
               </div>
-
+              
               <div>
                 <input
                   id="hourlyRate"

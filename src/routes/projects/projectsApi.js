@@ -1,34 +1,33 @@
-import { api } from '../../app/api'
-
+import { api } from "../../app/api";
 
 const projectsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getProjects: builder.query({
       query: () => ({
-        url: '/projects',
-        method: 'GET',
+        url: "/projects",
+        method: "GET",
       }),
       providesTags: ["Projects"],
     }),
     getProject: builder.query({
       query: (id) => ({
         url: `/projects/${id}`,
-        method: 'GET',
+        method: "GET",
       }),
       providesTags: ["Projects"],
     }),
     createProject: builder.mutation({
       query: (payload) => ({
-        url: '/projects',
-        method: 'POST',
+        url: "/projects",
+        method: "POST",
         body: payload,
       }),
       invalidatesTags: ["Projects"],
     }),
     updateProject: builder.mutation({
-      query: ({ id, body}) => ({
+      query: ({ id, body }) => ({
         url: `/projects/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
       invalidatesTags: ["Projects"],
@@ -36,13 +35,16 @@ const projectsApi = api.injectEndpoints({
     deleteProject: builder.mutation({
       query: ({ projectId }) => ({
         url: `/projects/${projectId}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
       invalidatesTags: ["Projects"],
     }),
   }),
 });
 
-
-
-export const {useGetProjectsQuery, useGetProjectQuery, useCreateProjectMutation, useDeleteProjectMutation } = projectsApi;
+export const {
+  useGetProjectsQuery,
+  useGetProjectQuery,
+  useCreateProjectMutation,
+  useDeleteProjectMutation,
+} = projectsApi;

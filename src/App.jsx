@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import './App.css'
 
@@ -21,8 +20,7 @@ function App() {
           <Route element={<Layout />}></Route>
           <Route index element={<Login />}></Route>
           <Route path="/auth/login" element={<Login />}></Route>
-          <Route path="/auth/signup" element={<Signup />}></Route>
-       
+                 
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>

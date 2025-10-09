@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useStartTimerMutation,  useStopTimerMutation} from "../../routes/timeEntries/timeEntriesApi";
 import Button from "../shared/Button";
-import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING, INPUT_STYLING} from "../../utils/commonStyles";
+import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING, INPUT_STYLING, INPUT_CONTAINER_STYLE} from "../../utils/commonStyles";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStopwatch, faStopwatch20 } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -52,14 +54,14 @@ export const NewTimeEntry = () => {
         <div className="flex sm:mx-auto sm:w-full sm:max-w-6xl p-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-6xl lg:px-8 w-full">
             <form onSubmit={handleStart}>
-              <div className="sm:w-full sm:max-w-6xl">
+              <div className={INPUT_CONTAINER_STYLE}>
                 <input
                   id="notes"
                   name="notes"
                   type="text"
                   value={notes}
                   placeholder="Task Title - be descriptive"
-                  onChange={(e)=>setNotes(e.target.value)}
+                  onChange={(e) => setNotes(e.target.value)}
                   className={INPUT_STYLING}
                 />
               </div>
@@ -68,8 +70,9 @@ export const NewTimeEntry = () => {
                   isLoading={false}
                   onClick={handleStart}
                   type="submit"
-                  className="mr-5 mt-2 px-10 py-2  rounded-xl bg-emerald-800 text-gray-300 dark:hover:text-indigo-400 disabled:opacity-50"
-                  title="Start Timer"
+                  className="mr-5 mt-2 px-5 py-2  rounded-xl bg-emerald-800 text-gray-300 dark:hover:bg-emerald-600 disabled:bg-gray-600 disabled:text-gray-200 disabled:opacity-50 flex gap-2 items-center"
+                  icon={<FontAwesomeIcon icon={faStopwatch} />}
+                  title="Start"
                   disabled={!buttonDisabled}
                 />
                 <div className="inline ">
@@ -78,7 +81,8 @@ export const NewTimeEntry = () => {
                     disabled={buttonDisabled}
                     onClick={() => handleStop(entryId)}
                     type="button"
-                    className=" mt-2 px-15 py-2 rounded-xl bg-red-800 text-gray-300 dark:hover:text-red-400 disabled:opacity-50"
+                    className=" mt-2 px-6 py-2 rounded-xl bg-red-800 text-gray-300 dark:hover:bg-red-600 disabled:bg-red-600 disabled:text-gray-200 disabled:opacity-40 flex gap-2 items-center"
+                    icon={<FontAwesomeIcon icon={faStopwatch} />}
                     title="Stop"
                   />
                 </div>

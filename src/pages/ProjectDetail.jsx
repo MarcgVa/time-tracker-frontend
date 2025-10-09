@@ -17,10 +17,10 @@ export default function ProjectDetail() {
   }, [status, data]);
   
   return (
-    <>
+    <div className="flex min-h-10 flex-col justify-center px-6 lg:px-8">
       <PageTitle title={project?.name || "Project Details"} />
       <NewTimeEntry projectId={id} />
       <ProjectLineItems projectId={id} />
-    </>
+    </div>
   );
 }

@@ -3,12 +3,12 @@ import { useGetInvoiceDetailsQuery } from "../../routes/invoices/invoicesApi";
 import DataTable from "../shared/DataTable";
 import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING } from "../../utils/commonStyles";
 import { useParams } from "react-router-dom";
-
+import { calculateTimeDifference } from "../../utils/TimeConversion";
 
 export const InvoiceLineItems = () => {
   const { id } = useParams();
   const { status, data, isLoading } = useGetInvoiceDetailsQuery(id);
-  
+  const columns = ["task", "startTime", "endTime", "duration"];
   const tableData = useMemo(() => {
     if (status == "fulfilled") {
       return data;
@@ -21,6 +21,9 @@ export const InvoiceLineItems = () => {
     endTime: entry.endTime
       ? new Date(entry.endTime).toLocaleString()
       : "In Progress",
+    duration: entry.endTime
+      ? calculateTimeDifference(entry.startTime, entry.endTime).duration
+      : null,
   }));
 
   return (
@@ -33,7 +36,7 @@ export const InvoiceLineItems = () => {
               <p>Loading invoice details...</p>
             ) : (
               <DataTable
-                columns={["task", "startTime", "endTime"]}
+                columns={columns}
                 data={timeEntries || []}
               />
             )}

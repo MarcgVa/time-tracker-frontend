@@ -13,9 +13,9 @@ import {
 } from "@heroicons/react/16/solid";
 import Button from "./shared/Button";
 
-const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-gray-500";
+const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-transparent ";
 const InputContainerStyle =
-  "2-480px h-80px px-4 py-2 m-3 flex items-center gap-3 bg-gray-500";
+  "w-480px h-80px px-4 py-2 m-3 flex items-center gap-3 bg-gray-500";
 const ActiveTab =
   "text-white bg-indigo-600 cursor-pointer grow py-1 text-center";
 const InactiveTab =
@@ -67,8 +67,8 @@ export const LoginSignup = () => {
   };
 
   return (
-    <div className="absolute top-12 left-0 right-0 bottom-0 ">
-      <div className="relative flex flex-col mt-12 sm:mt-12 md:mt-70 sm:mx-auto sm:max-w-sm max-w-sm mx-auto items-center justify-center bg-gray-400">
+    <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
+      <div className="relative flex flex-col w-md mx-auto sm:mx-auto sm:max-w-sm max-w-sm  bg-gray-400">
         <div className="absolute top-0 left-0 flex mb-2 text-sm right-0">
           <div
             className={action === "Login" ? ActiveTab : InactiveTab}

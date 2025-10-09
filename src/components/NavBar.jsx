@@ -4,9 +4,10 @@ import { useDispatch } from "react-redux";
 import { logout } from '../routes/auth/authSlice';
 import { clearInvoice } from "../routes/invoices/invoiceSlice";
 
+
 export default function NavBar() {
   const dispatch = useDispatch();
-
+  
 
   const handleLogout = () => {
     dispatch(logout());
@@ -15,10 +16,14 @@ export default function NavBar() {
   }
 
   return (
-    <header>
-      <div className="absolute top-0 left-0 w-full flex items-center px-10 space-y-2 bg-zinc-600 ">
+    <header className="fixed top-0 left-0 right-0 z-999">
+      <div className="w-full flex items-center px-10 space-y-2 bg-gray-950 shadow-md shadow-gray-600">
         <div className="">
-          <img src={logo} alt="Application Logo" className="size-10 rounded-full" />
+          <img
+            src={logo}
+            alt="Application Logo"
+            className="size-10 rounded-full"
+          />
         </div>
         <div>
           <ul className="flex justify-between space-x-10 mx-10">
@@ -27,11 +32,11 @@ export default function NavBar() {
                 to="/dashboard"
                 style={({ isActive }) => {
                   return {
-                    color: isActive ? "#ffa500" : "#c8c8cb",
+                    color: isActive ? "#4aa2ca" : "#c8c8cb",
                   };
                 }}
               >
-                Dashboard
+                Projects
               </NavLink>
             </li>
             <li className="">
@@ -39,18 +44,31 @@ export default function NavBar() {
                 to="/invoices"
                 style={({ isActive }) => {
                   return {
-                    color: isActive ? "#ffa500" : "#c8c8cb",
+                    color: isActive ? "#4aa2ca" : "#c8c8cb",
                   };
                 }}
               >
                 Invoices
               </NavLink>
             </li>
+            <li className="hidden">
+              <NavLink
+                to="/company"
+                style={({ isActive }) => {
+                  return {
+                    color: isActive ? "#4aa2ca" : "#c8c8cb",
+                  };
+                }}
+              >
+                Company
+              </NavLink>
+            </li>
           </ul>
         </div>
-        <button onClick={handleLogout}
-          className='bg-zinc-700 px-3 mr-10 rounded-full absolute right-0 text-zinc-400 hover:bg-orange-300 hover:text-zinc-950
-                      text-sm'
+        <button
+          onClick={handleLogout}
+          className="bg-zinc-700 px-3 mr-10 rounded-full absolute right-0 text-zinc-400 hover:bg-blue-700 hover:text-blue-400
+                      text-sm"
         >
           Logout
         </button>

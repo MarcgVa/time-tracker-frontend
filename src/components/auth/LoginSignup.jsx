@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../routes/auth/authApi";
-import { useSignupMutation } from "../routes/auth/authApi";
-import { setCredentials } from "../routes/auth/authSlice";
-import { validateEmail, passwordStrength } from "../utils/validation";
-import { Logo } from "./Logo";
+import { useLoginMutation } from "../../routes/auth/authApi";
+import { useSignupMutation } from "../../routes/auth/authApi";
+import { setCredentials } from "../../routes/auth/authSlice";
+import { validateEmail, passwordStrength } from "../../utils/validation";
+
 import {
   EnvelopeIcon,
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/16/solid";
-import Button from "./shared/Button";
+import Button from "../shared/Button";
 
 const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-transparent ";
 const InputContainerStyle =

@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
-import Login from "./pages/Login";
+import Authenticate from "./pages/Auth";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import './App.css'
 
@@ -19,8 +19,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route element={<Layout />}></Route>
-          <Route index element={<Login />}></Route>
-          <Route path="/auth/login" element={<Login />}></Route>
+          <Route index element={<Authenticate />}></Route>
+          <Route path="/auth/login" element={<Authenticate />}></Route>
                  
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />

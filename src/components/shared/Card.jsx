@@ -1,25 +1,32 @@
 import React from "react";
-
-
-export const Card = ({title,description,hourlyRate,action,children}) => {
+import { useNavigate } from "react-router-dom";
+export const Card = ({
+  title,
+  description,
+  hourlyRate,
+  location,
+  children,
+}) => {
+  const navigate = useNavigate();
   return (
-    <div className="relative bg-gray-400 p-4 min-w-sm border border-gray-900 border-shadow shadow-xl rounded-lg">
-      <div className="flex flex-col">
-        <div className="absolute top-0 left-0 right-0 rounded-t-sm text-gray-900 bg-gray-900">
-          <h3 className="text-gray-400 text-center text-sm py-1">{title}</h3>
+    <div
+      onClick={() => navigate(location)}
+      className="grid-rows-3 bg-zinc-300 min-w-sm max-w-md  max-h-50 border-gray-900 shadow-md shadow-gray-600 rounded-lg m-0.5 mx-6 cursor-pointer relative"
+    >
+      <div className="rounded-t-sm bg-blue-800">
+        <h3 className="text-gray-200 text-center text-sm py-1">{title}</h3>
+      </div>
+      <div className="mt-3 px-2 text-left text-wrap text-xs max-w-xs">
+        <p>{description}</p>
+      </div>
+      <div>
+        <div className="absolute bottom-1 left-2 text-xs font-semibold">
+          Hourly Rate: ${hourlyRate}
         </div>
-        <div className="mt-3 px-2 text-left text-wrap max-w-xs">
-          <p>{description}</p>
-        </div>
-        <div className="flex text-xs justify-between">
-          <div className="">
-            ${hourlyRate}
-          </div>
-          <div className="absolute bottom-1 right-1 flex flex-row items-end gap-1">
-            {children}
-          </div>
+        <div className="absolute bottom-1 right-1 flex flex-row gap-2 text-xs">
+          {children}
         </div>
       </div>
     </div>
   );
-}
+};

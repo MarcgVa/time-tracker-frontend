@@ -20,7 +20,7 @@ const MODAL_BG_STYLE =
 "absolute top-0 right-0 left-0 bottom-0 flex justify-center items-center z-999  bg-gradient-to-b from-70% to-99% from-blue-800 to-indigo-800 ";
 
 const MODAL_CONTAINER_STYLE =
-"relative flex flex-col mx-auto min-w-md bg-gray-500 z-10";
+"relative flex flex-col mx-auto min-w-md bg-gray-500 z-10 border-shadow shadow-xl shadow-gray-800";
 
 const MODAL_FORM_STYLE =
 "flex flex-col justify-center items-center gap-3 mx-auto my-10 min-w-sm rounded-md opacity-90";

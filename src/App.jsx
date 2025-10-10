@@ -11,6 +11,7 @@ import './App.css'
 
 
 
+
 function App() {
   return (
     <>
@@ -33,8 +34,7 @@ function App() {
           <Route path="/projects/:id" element={<ProtectedRoute />}>
             <Route path="/projects/:id" element={<ProjectDetails />} />
           </Route>
-                
-          
+        
         </Routes>
       </Router>
     </>

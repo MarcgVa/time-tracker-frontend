@@ -4,6 +4,7 @@ import DataTable from "../shared/DataTable";
 import { BOX_TITLE_STYLING, BOX_CONTAINER_STYLING } from "../../utils/commonStyles";
 import { calculateTimeDifference } from "../../utils/TimeConversion";
 
+
 export const ProjectLineItems = ({ projectId }) => {
   const { status,data = [], isLoading } = useGetTimeEntriesQuery(projectId);
   const [entries, setEntries] = useState();
@@ -34,6 +35,7 @@ export const ProjectLineItems = ({ projectId }) => {
             Time Submissions
           </h2>
         </div>
+
         <div>
           {isLoading ? (
             <p>Loading time submissions</p>

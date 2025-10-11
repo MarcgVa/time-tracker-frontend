@@ -1,17 +1,8 @@
-import React from 'react'
+import React from "react";
 
-  
-export default function Button({ isLoading = false, disabled, onClick, title, type = 'button', className }) {
-  return (
-    <>
-      <button
-        type={type}
-        disabled={disabled}
-        onClick={onClick}
-        className={`${className}`}
-      >
-        {isLoading ? 'Loading...' : title}
-      </button>
-    </>
-  );
+export default function Button({...props }) {
+  return <button {...props} >
+    {props.icon}
+    {props.title}
+  </button>;
 }

@@ -4,7 +4,7 @@ import { InvoiceList } from "../components/invoices/InvoiceList";
 
 export default function Invoices() {
   return (
-    <div>
+    <div className="flex min-h-10 flex-col justify-center px-6 lg:px-8">
       <PageTitle title="Invoices" />
       <NewInvoice />
       <InvoiceList />

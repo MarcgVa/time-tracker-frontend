@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../routes/auth/authApi";
-import { useSignupMutation } from "../routes/auth/authApi";
-import { setCredentials } from "../routes/auth/authSlice";
-import { validateEmail, passwordStrength } from "../utils/validation";
-import { Logo } from "./Logo";
-import {
-  EnvelopeIcon,
-  LockClosedIcon,
-  UserIcon,
-} from "@heroicons/react/16/solid";
-import Button from "./shared/Button";
+import { useLoginMutation } from "../../routes/auth/authApi";
+import { useSignupMutation } from "../../routes/auth/authApi";
+import { setCredentials } from "../../routes/auth/authSlice";
+import { validateEmail, passwordStrength } from "../../utils/validation";
+import Button from "../shared/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash,faEnvelope,faLock,faUser } from "@fortawesome/free-solid-svg-icons";
 
-const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-gray-500";
+
+// Repeated stylings used on the component.
+const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-transparent ";
 const InputContainerStyle =
-  "2-480px h-80px px-4 py-2 m-3 flex items-center gap-3 bg-gray-500";
+  "w-480px h-80px px-4 py-2 m-3 flex items-center gap-3 bg-gray-500";
 const ActiveTab =
   "text-white bg-indigo-600 cursor-pointer grow py-1 text-center";
 const InactiveTab =
   "text-gray-700 bg-gray-500 cursor-pointer grow py-1 text-center";
+
 
 export const LoginSignup = () => {
   const [action, setAction] = useState("Login");
@@ -34,6 +33,7 @@ export const LoginSignup = () => {
     email: "",
     password: "",
   });
+  
   const validEmail =
     formData.email.length > 0 ? validateEmail(formData.email) : true;
 
@@ -66,9 +66,11 @@ export const LoginSignup = () => {
     }
   };
 
+  
+
   return (
-    <div className="absolute top-12 left-0 right-0 bottom-0 ">
-      <div className="relative flex flex-col mt-12 sm:mt-12 md:mt-70 sm:mx-auto sm:max-w-sm max-w-sm mx-auto items-center justify-center bg-gray-400">
+    <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
+      <div className="relative flex flex-col w-md mx-auto sm:mx-auto sm:max-w-sm max-w-sm  bg-gray-400">
         <div className="absolute top-0 left-0 flex mb-2 text-sm right-0">
           <div
             className={action === "Login" ? ActiveTab : InactiveTab}
@@ -89,7 +91,7 @@ export const LoginSignup = () => {
           <div className="flex flex-col justify-center items-center mt-5">
             {action === "Sign Up" ? (
               <div className={InputContainerStyle}>
-                <UserIcon className="size-5 text-gray-600 " />
+                <FontAwesomeIcon icon={faUser} className="size-5 text-gray-600 " />
                 <input
                   name="name"
                   className={InputBoxStyle}
@@ -103,7 +105,7 @@ export const LoginSignup = () => {
             )}
 
             <div className={InputContainerStyle}>
-              <EnvelopeIcon className="size-5 text-gray-600" />
+              <FontAwesomeIcon icon={faEnvelope} className="size-5 text-gray-600" />
               <input
                 name="email"
                 required
@@ -122,23 +124,27 @@ export const LoginSignup = () => {
             </div>
             <div className="flex items-center">
               <div className={InputContainerStyle}>
-                <LockClosedIcon className="size-5 text-gray-600" />
+                <FontAwesomeIcon icon={faLock} className="size-5 text-gray-600" />
                 <input
                   name="password"
                   required
                   className={InputBoxStyle}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   onChange={handleUpdate}
+                  onReturnKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleSubmit(e);
+                    }
+                  }}
                 />
               </div>
               <div className="">
                 <Button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  isLoading={false}
                   className="cursor-pointer bg-white/0 dark:bg-black/0 size-1"
-                  title={showPassword ? "🙈" : "👁️"}
+                  icon={showPassword ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye} className="size-5 text-gray-600" />}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 />
               </div>

@@ -34,7 +34,7 @@ const projectsApi = api.injectEndpoints({
     }),
     deleteProject: builder.mutation({
       query: ({ projectId }) => ({
-        url: `/projects/${projectId}`,
+        url: `/projects/delete/${projectId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Projects"],

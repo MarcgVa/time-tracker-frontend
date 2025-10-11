@@ -1,48 +1,33 @@
-import { useEffect, useState } from "react";
-import { useGetProjectsQuery } from "../routes/projects/projectsApi";
-import DataTable from "../components/shared/DataTable";
-import NewProject from "../components/NewProject";
-import PageTitle from "../components/shared/PageTitle";
-
+import { useState } from "react";
+import NewProject from "../components/modals/NewProject";
+import Button from "../components/shared/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { ProjectCards } from "../components/projects/ProjectCards";
+import { ProjectSummary } from "../components/projects/ProjectSummary";
 
 export default function Dashboard() {
-  const columns = ["name", "description", "hourlyRate", "actions"];
-  const { status, data, isLoading } = useGetProjectsQuery();
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    if (status == "fulfilled") {
-      setProjects(
-        data?.map((project) => ({
-          ...project,
-          actions: (
-            <a
-              href={`/projects/${project.id}`}
-              className="cursor-pointer px-5 py-1 rounded-xl bg-indigo-500 text-indigo-200"
-            >
-              View
-            </a>
-          ),
-        }))
-      );
-    }
-  }, [status, data]);
+  const [isModal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!isModal);
+  };
 
   return (
-    <>
-      <div className="flex min-h-10 flex-col justify-center px-6 py-12 lg:px-8">
-        <PageTitle title='Project Dashboard' /> 
-        
-        <NewProject />
-
-        <div className="mt-10 sm:mx-auto sm:w-full border dark:border-gray-600 border-gray-900">
-          {isLoading && projects?.length == 0 ? (
-            <p>Loading projects</p>
-          ) : (
-            <DataTable columns={columns} data={projects} />
-          )}
-        </div>
+    <div className="h-lvh max-h-lvh flex flex-col mt-12">
+      <div className="flex justify-start py-4 bg-gray-400">
+        {isModal && <NewProject setToggleModal={toggleModal} />}
+        <Button
+          onClick={toggleModal}
+          disabled={isModal}
+          type="submit"
+          className="flex items-center mx-5 px-5 py-3 gap-4 bg-emerald-800 rounded-md 
+          text-xs text-emerald-200 font-bold tracking-wider cursor-pointer"
+          icon={<FontAwesomeIcon icon={faPlus} />}
+          title={"Add Project"}
+        />
       </div>
-    </>
+      <ProjectSummary />
+      <ProjectCards />
+    </div>
   );
 }

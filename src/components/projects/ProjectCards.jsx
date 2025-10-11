@@ -44,6 +44,7 @@ export const ProjectCards = () => {
                 description={item.description}
                 hourlyRate={item.hourlyRate}
                 location={`/projects/${item.id}`}
+                isCompleted={item.isCompleted}
                 >
                <Button
                   onClick={(event) => {

@@ -22,9 +22,7 @@ export const ProjectLineItems = ({ projectId }) => {
     task: item.notes,
     startTime: new Date(item.startTime).toLocaleString(),
     endTime: item.endTime && new Date(item.endTime).toLocaleString(),
-    duration: item.endTime
-      ? calculateTimeDifference(item.startTime, item.endTime).duration
-      : null,
+    duration: item.duration && item.endTime ? item.duration : calculateTimeDifference(item.startTime, new Date(item.endTime)).duration,
   }));
 
   return (

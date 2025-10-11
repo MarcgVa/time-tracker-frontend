@@ -5,6 +5,7 @@ export const Card = ({
   description,
   hourlyRate,
   location,
+  isCompleted,
   children,
 }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export const Card = ({
       onClick={() => navigate(location)}
       className="grid-rows-3 bg-zinc-300 min-w-sm max-w-md  max-h-50 border-gray-900 shadow-md shadow-gray-600 rounded-lg m-0.5 mx-6 cursor-pointer relative"
     >
-      <div className="rounded-t-sm bg-blue-800">
+      <div className={`${isCompleted ? 'bg-green-800' : 'bg-blue-800'} rounded-t-sm `}>
         <h3 className="text-gray-200 text-center text-sm py-1">{title}</h3>
       </div>
       <div className="mt-3 px-2 text-left text-wrap text-xs max-w-xs">

@@ -17,8 +17,7 @@ export default function ProjectDetail() {
   }, [status, data]);
   
   return (
-    <div className="flex min-h-10 flex-col justify-center px-6 lg:px-8">
-      <PageTitle title={project?.name || "Project Details"} />
+    <div className="h-lvh max-h-lvh flex flex-col mt-12">
       <NewTimeEntry projectId={id} />
       <ProjectLineItems projectId={id} />
     </div>

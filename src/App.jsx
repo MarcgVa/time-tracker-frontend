@@ -1,3 +1,4 @@
+import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar";
@@ -7,7 +8,8 @@ import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
 import Authenticate from "./pages/Auth";
 import InvoiceDetails from "./pages/InvoiceDetails";
-import './App.css'
+import { Profile } from "./pages/Profile";
+import { Help } from './pages/Help';
 
 
 
@@ -34,7 +36,11 @@ function App() {
           <Route path="/projects/:id" element={<ProtectedRoute />}>
             <Route path="/projects/:id" element={<ProjectDetails />} />
           </Route>
-        
+          <Route path="/help" element={<Help />} />
+            
+          <Route path="/profile" element={<ProtectedRoute />}> 
+            <Route path="/profile" element={<Profile />} /> 
+          </Route>
         </Routes>
       </Router>
     </>

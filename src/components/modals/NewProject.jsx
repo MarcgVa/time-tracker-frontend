@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { useCreateProjectMutation } from "../../routes/projects/projectsApi";
 import Button from "../shared/Button";
 import {
-  BOX_CONTAINER_STYLING,
-  BOX_TITLE_STYLING,
-  INPUT_CONTAINER_STYLE,
-  INPUT_STYLING,
-  INPUT_WRAPPER_STYLE,
   MODAL_BG_STYLE,
   MODAL_BTN_STYLE,
   MODAL_CONTAINER_STYLE,

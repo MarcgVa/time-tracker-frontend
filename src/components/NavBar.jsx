@@ -3,6 +3,10 @@ import logo from '../assets/img/logos/TimeTrackerLogo-bgDark-400.png'
 import { useDispatch } from "react-redux";
 import { logout } from '../routes/auth/authSlice';
 import { clearInvoice } from "../routes/invoices/invoiceSlice";
+import { Dropdown } from "./shared/Dropdown/Dropdown";
+import { DropdownItem } from "./shared/Dropdown/DropdownItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function NavBar() {
@@ -14,6 +18,7 @@ export default function NavBar() {
     dispatch(clearInvoice());
     localStorage.clear();
   }
+  const dropDownList = [<a href="/profile">Profile</a>, <a href="/help">Help</a>, <a onClick={handleLogout}>Logout</a>];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-999">
@@ -65,13 +70,23 @@ export default function NavBar() {
             </li>
           </ul>
         </div>
-        <button
-          onClick={handleLogout}
-          className="bg-zinc-700 px-3 mr-10 rounded-full absolute right-0 text-zinc-400 hover:bg-blue-700 hover:text-blue-400
-                      text-sm"
-        >
-          Logout
-        </button>
+        <div className="absolute right-6 mr-6 w-fit rounded-md flex items-center justify-center bg-gray-950">
+          <Dropdown
+            buttonText={<FontAwesomeIcon icon={faBars} className="text-gray-300 hover:text-gray-100 cursor-pointer" />}
+            content={
+              <>
+                {dropDownList.map((item) => (
+                  <div
+                    key={item}
+                    className="p-2 hover:bg-gray-200 cursor-pointer rounded-md "
+                  >
+                    <DropdownItem key={item}>{item}</DropdownItem>
+                  </div>
+                ))}
+              </>
+            }
+          />
+        </div>
       </div>
     </header>
   );

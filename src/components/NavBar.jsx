@@ -72,7 +72,7 @@ export default function NavBar() {
         </div>
         <div className="absolute right-6 mr-6 w-fit rounded-md flex items-center justify-center bg-gray-950">
           <Dropdown
-            buttonText={<FontAwesomeIcon icon={faBars} className="text-gray-300 hover:text-gray-100 cursor-pointer" />}
+            buttonText={<FontAwesomeIcon icon={faBars} className="text-lg text-gray-300 hover:text-gray-100 cursor-pointer" />}
             content={
               <>
                 {dropDownList.map((item) => (

@@ -8,9 +8,10 @@ import ProjectDetails from "./pages/ProjectDetail";
 import Invoices from "./pages/Invoices";
 import Authenticate from "./pages/Auth";
 import InvoiceDetails from "./pages/InvoiceDetails";
-import { Profile } from "./pages/Profile";
-import { Help } from './pages/Help';
-
+import {Profile} from "./pages/Profile";
+import {Help } from './pages/Help';
+import HomePage from "./pages/HomePage";
+import { AboutPage } from './pages/AboutPage';
 
 
 
@@ -21,8 +22,13 @@ function App() {
         <NavBar />
         <Routes>
           <Route element={<Layout />}></Route>
-          <Route index element={<Authenticate />}></Route>
-          <Route path="/auth/login" element={<Authenticate />}></Route>
+          <Route index element={<HomePage />}></Route>
+          <Route path="/home" element={<HomePage />}></Route>
+
+          <Route path="/login" element={<Authenticate />}></Route>
+          <Route path="/signup" element={<Authenticate />}></Route>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/help" element={<Help />} />
                  
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -35,12 +41,11 @@ function App() {
           </Route>
           <Route path="/projects/:id" element={<ProtectedRoute />}>
             <Route path="/projects/:id" element={<ProjectDetails />} />
-          </Route>
-          <Route path="/help" element={<Help />} />
-            
+          </Route>  
           <Route path="/profile" element={<ProtectedRoute />}> 
             <Route path="/profile" element={<Profile />} /> 
           </Route>
+          
         </Routes>
       </Router>
     </>

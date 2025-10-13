@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
-export const DropdownTest = ({ title, ...props }) => {
+export const Dropdown = ({ title, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 

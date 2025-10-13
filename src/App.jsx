@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import Layout from "./components/Layout";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/ProjectPage";
 import ProjectDetails from "./pages/ProjectDetail";
-import Invoices from "./pages/Invoices";
-import Authenticate from "./pages/Auth";
+import InvoicePage from "./pages/InvoicePage";
+import Authenticate from "./pages/LoginSignupPage";
 import InvoiceDetails from "./pages/InvoiceDetails";
-import {Profile} from "./pages/Profile";
-import {Help } from './pages/Help';
+import Profile from "./pages/ProfilePage";
+import HelpPage from './pages/HelpPage';
 import HomePage from "./pages/HomePage";
-import { AboutPage } from './pages/AboutPage';
+import AboutPage from "./pages/AboutPage";
+import ContactPage from './pages/ContactPage';
 
 
 
@@ -28,13 +29,14 @@ function App() {
           <Route path="/login" element={<Authenticate />}></Route>
           <Route path="/signup" element={<Authenticate />}></Route>
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/help" element={<Help />} />
+          <Route path="/help" element={<HelpPage />} />
+          <Route path='/contact' element={<ContactPage/> }/>
                  
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
           <Route path="/invoices" element={<ProtectedRoute />}>
-            <Route path="/invoices" element={<Invoices />} />
+            <Route path="/invoices" element={<InvoicePage />} />
           </Route>
           <Route path="/invoices/:id" element={<ProtectedRoute />}>
             <Route path="/invoices/:id" element={<InvoiceDetails />} />

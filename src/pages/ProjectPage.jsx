@@ -6,7 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { ProjectCards } from "../components/projects/ProjectCards";
 import { ProjectSummary } from "../components/projects/ProjectSummary";
 
-export default function Dashboard() {
+export default function ProjectPage() {
   const [isModal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!isModal);

@@ -1,19 +1,19 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/img/logos/TimeTrackerLogo-bgDark-400.png";
 import { useDispatch } from "react-redux";
-import { logout } from "../routes/auth/authSlice";
+import { useLogoutMutation } from "../routes/auth/authApi";
 import { clearInvoice } from "../routes/invoices/invoiceSlice";
-import { Dropdown } from "./shared/Dropdown/Dropdown";
-import { DropdownItem } from "./shared/Dropdown/DropdownItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { DropdownTest } from "./shared/Dropdown";
+import { Dropdown } from "./shared/Dropdown";
+
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const [logout] = useLogoutMutation();
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
     dispatch(clearInvoice());
     localStorage.clear();
   };
@@ -98,7 +98,7 @@ export default function NavBar() {
             </ul>
           </div>
           <div className="flex absolute items-center right-10">
-            <DropdownTest
+            <Dropdown
               title={
                 <FontAwesomeIcon icon={faBars} className="text-blue-300" />
               }
@@ -120,7 +120,7 @@ export default function NavBar() {
                   )}
                 </div>
               ))}
-            </DropdownTest>
+            </Dropdown>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    credentials: "include", // for auth cookies/jwt
     prepareHeaders: (headers) => {
       const token = window.sessionStorage.getItem("token");
       if (token) {

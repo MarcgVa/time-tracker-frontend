@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProjectQuery } from "../routes/projects/projectsApi";
-import PageTitle from "../components/shared/PageTitle";
 import { NewTimeEntry } from "../components/TimeEntry/NewTimeEntry";
 import { ProjectLineItems } from "../components/projects/ProjectLineItems";
 

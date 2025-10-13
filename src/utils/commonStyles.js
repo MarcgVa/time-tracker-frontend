@@ -1,4 +1,6 @@
 /* Recurring Styles */
+
+/* Box section */
 const BOX_TITLE_STYLING =
   "absolute top-0 left-10 bg-gray-400 font-semibold mb-5 text-center text-sm text-gray-950 rounded-md px-3 py-1 -mt-4 dark:border-shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:bg-gradient-to-b dark:from-50% dark:from-transparent dark:to-90% dark:to-gray-700";
 
@@ -47,3 +49,5 @@ export {
   MODAL_INPUT_STYLE,
   MODAL_INPUT_CONTAINER_STYLE
 };
+
+

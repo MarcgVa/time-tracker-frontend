@@ -33,7 +33,8 @@ export const LoginSignup = () => {
   const token = useSelector((state) => state.auth.token);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -99,10 +100,27 @@ export const LoginSignup = () => {
                     className="size-5 text-gray-600 "
                   />
                   <input
-                    name="name"
+                    name="firstName"
                     className={InputBoxStyle}
                     type="text"
-                    placeholder="Name"
+                    placeholder="First Name"
+                    onChange={handleUpdate}
+                  />
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {action === "Sign Up" ? (
+                <div className={InputContainerStyle}>
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="size-5 text-gray-600 "
+                  />
+                  <input
+                    name="lastName"
+                    className={InputBoxStyle}
+                    type="text"
+                    placeholder="Last Name"
                     onChange={handleUpdate}
                   />
                 </div>

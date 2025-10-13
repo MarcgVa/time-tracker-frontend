@@ -18,7 +18,6 @@ export const ProjectLineItems = ({ projectId }) => {
   async function handleStop(entryId) {
     await stopTimer(entryId);
     setEntryId(null);
-   ;
   }
 
   useEffect(() => {
@@ -38,7 +37,6 @@ export const ProjectLineItems = ({ projectId }) => {
       </a>,
   }));
 
-  const item = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <div className="flex sm:mx-auto sm:w-full sm:max-w-6xl p-6 lg:px-8">
       <div className="max-w-7xl sm:mx-auto sm:w-full border dark:border-gray-600 border-gray-900 bg-gray-400">

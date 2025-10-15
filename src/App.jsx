@@ -1,54 +1,51 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ProtectedRoute } from "./components/auth/ProtectedRoute";
-import NavBar from "./components/NavBar";
-import Layout from "./components/Layout";
-import Dashboard from "./pages/Dashboard";
-import ProjectDetails from "./pages/ProjectDetail";
-import Invoices from "./pages/Invoices";
-import Authenticate from "./pages/Auth";
-import InvoiceDetails from "./pages/InvoiceDetails";
-import {Profile} from "./pages/Profile";
-import {Help } from './pages/Help';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "./features/shared/components/ProtectedRoute";
+import Layout from "./features/shared/components/Layout";
+import Dashboard from "./features/Projects/pages/ProjectPage";
+import ProjectDetailsPage from "./features/Projects/pages/ProjectDetailsPage";
+import InvoicePage from "./features/Invoices/pages/InvoicePage";
+import InvoiceDetails from "./features/Invoices/pages/InvoiceDetails";
+import Profile from "./features/Users/pages/ProfilePage";
+import HelpPage from "./pages/HelpPage";
 import HomePage from "./pages/HomePage";
-import { AboutPage } from './pages/AboutPage';
-
-
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import Welcome from "./features/shared/pages/Welcome";
+import LoginSignupPage from "./features/Auth/pages/LoginSignupPage";
 
 function App() {
   return (
-    <>
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route element={<Layout />}></Route>
-          <Route index element={<HomePage />}></Route>
-          <Route path="/home" element={<HomePage />}></Route>
-
-          <Route path="/login" element={<Authenticate />}></Route>
-          <Route path="/signup" element={<Authenticate />}></Route>
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/help" element={<Help />} />
-                 
-          <Route path="/dashboard" element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-          <Route path="/invoices" element={<ProtectedRoute />}>
-            <Route path="/invoices" element={<Invoices />} />
-          </Route>
-          <Route path="/invoices/:id" element={<ProtectedRoute />}>
-            <Route path="/invoices/:id" element={<InvoiceDetails />} />
-          </Route>
-          <Route path="/projects/:id" element={<ProtectedRoute />}>
-            <Route path="/projects/:id" element={<ProjectDetails />} />
-          </Route>  
-          <Route path="/profile" element={<ProtectedRoute />}> 
-            <Route path="/profile" element={<Profile />} /> 
-          </Route>
-          
-        </Routes>
-      </Router>
-    </>
+    <Routes>
+      /* Public Routes */
+      <Route element={<Layout />} />
+      <Route index element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/login" element={<LoginSignupPage />} />
+      <Route path="/signup" element={<LoginSignupPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/help" element={<HelpPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      /* Protected Routes */
+      <Route path="/welcome" element={<ProtectedRoute />}>
+        <Route path="/welcome" element={<Welcome />} />
+      </Route>
+      <Route path="/projects" element={<ProtectedRoute />}>
+        <Route path="/projects" element={<Dashboard />} />
+      </Route>
+      <Route path="/invoices" element={<ProtectedRoute />}>
+        <Route path="/invoices" element={<InvoicePage />} />
+      </Route>
+      <Route path="/invoices/:id" element={<ProtectedRoute />}>
+        <Route path="/invoices/:id" element={<InvoiceDetails />} />
+      </Route>
+      <Route path="/projects/:id" element={<ProtectedRoute />}>
+        <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+      </Route>
+      <Route path="/profile" element={<ProtectedRoute />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
 }
 

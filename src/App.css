@@ -1,7 +1,2 @@
 @import "tailwindcss";
 
-
-p {
-  border-bottom: 1px;
-  border-color: green;
-}

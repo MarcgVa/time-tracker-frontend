@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api";
-import authReducer from "../routes/auth/authSlice";
-import invoiceReducer from "../routes/invoices/invoiceSlice";
-import companyReducer from "../routes/company/companySlice";
+import authReducer from "../features/Auth/routes/authSlice";
+import invoiceReducer from "../features/Invoices/routes/invoiceSlice";
+import companyReducer from "../features/Company/routes/companySlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +11,7 @@ export const store = configureStore({
     invoice: invoiceReducer,
     company: companyReducer,
   },
-  middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(api.middleware),
+  middleware: (getDefaultMiddleWare) =>
+    getDefaultMiddleWare().concat(api.middleware),
+  devTools: import.meta.env.VITE_DEV === "dev" ? true : false,
 });

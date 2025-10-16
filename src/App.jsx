@@ -11,8 +11,8 @@ import HelpPage from "./pages/HelpPage";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-import Welcome from "./features/shared/pages/Welcome";
 import LoginSignupPage from "./features/Auth/pages/LoginSignupPage";
+import DashboardPage from "./features/Dashboard/pages/DashboardPage";
 
 function App() {
   return (
@@ -27,8 +27,8 @@ function App() {
       <Route path="/help" element={<HelpPage />} />
       <Route path="/contact" element={<ContactPage />} />
       /* Protected Routes */
-      <Route path="/welcome" element={<ProtectedRoute />}>
-        <Route path="/welcome" element={<Welcome />} />
+      <Route path="/dashboard" element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Route>
       <Route path="/projects" element={<ProtectedRoute />}>
         <Route path="/projects" element={<Dashboard />} />

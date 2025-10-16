@@ -3,9 +3,9 @@ import {
   useGetTimeEntriesQuery,
   useStopTimerMutation,
 } from "../../shared/routes/timeEntriesApi";
-import { calculateTimeDifference } from "../../shared/utils/TimeConversion";
+import { calculateTimeDifference } from "../../shared/utils/timeConversion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStop, faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import DataTable from "../../shared/components/DataTable";
 
 
@@ -32,9 +32,9 @@ export const ProjectLineItems = ({ projectId }) => {
     task: item.notes,
     startTime: new Date(item.startTime).toLocaleString(),
     endTime: item.endTime && new Date(item.endTime).toLocaleString(),
-    duration:
+    hours:
       item.endTime &&
-      calculateTimeDifference(item.startTime, new Date(item.endTime)).duration,
+      calculateTimeDifference(item.startTime, new Date(item.endTime)).hours,
     action: !item.endTime && (
       <a
         onClick={() => handleStop(item.id)}

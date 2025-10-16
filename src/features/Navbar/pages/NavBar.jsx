@@ -60,7 +60,7 @@ export default function NavBar() {
             <ul className="flex justify-between space-x-10 mx-10">
               <li>
                 <NavLink
-                  to={ token ? "/welcome" : "/home"}
+                  to={ token ? "/dashboard" : "/home"}
                   className={({ isActive }) =>
                     isActive ? "text-blue-400" : "text-gray-300"
                   }

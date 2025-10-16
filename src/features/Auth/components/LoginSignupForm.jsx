@@ -33,7 +33,7 @@ export const LoginSignupForm = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/welcome");
+      navigate("/dashboard");
     }
   }, [token, navigate]);
 
@@ -60,7 +60,7 @@ export const LoginSignupForm = () => {
           break;
       }
       console.log('results', result);
-      navigate("/welcome");
+      navigate("/dashboard");
     } catch (err) {
       console.error("Sign failed", err);
     }

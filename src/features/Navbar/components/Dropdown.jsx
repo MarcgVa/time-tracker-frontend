@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
 export const Dropdown = ({ title, ...props }) => {
@@ -6,8 +6,10 @@ export const Dropdown = ({ title, ...props }) => {
   const dropdownRef = useRef(null);
 
   useOnClickOutside(dropdownRef, () => setIsOpen(false));
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => {
+    console.log('setIsOpen');
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div ref={dropdownRef} className="absolute inline-block z-100">

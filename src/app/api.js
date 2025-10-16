@@ -7,7 +7,6 @@ const baseQuery = fetchBaseQuery({
   credentials: "include", // for auth cookies/jwt
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
-    headers.set("Content-Type", 'application/json');
     if (token) {
       headers.append("Authorization", `Bearer ${token}`);
     }

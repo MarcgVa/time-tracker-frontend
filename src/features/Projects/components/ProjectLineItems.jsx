@@ -5,8 +5,9 @@ import {
 } from "../../shared/routes/timeEntriesApi";
 import { calculateTimeDifference } from "../../shared/utils/TimeConversion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStop } from "@fortawesome/free-solid-svg-icons";
+import { faStop, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import DataTable from "../../shared/components/DataTable";
+
 
 export const ProjectLineItems = ({ projectId }) => {
   const { status, data = [], isLoading } = useGetTimeEntriesQuery(projectId);
@@ -37,9 +38,10 @@ export const ProjectLineItems = ({ projectId }) => {
     action: !item.endTime && (
       <a
         onClick={() => handleStop(item.id)}
-        className="text-red-600 hover:underline "
+        className="flex bg-red-900 hover:bg-red-900/50 text-white text-xs px-2 py-0.5 rounded-2xl cursor-pointer gap-2 items-center"
       >
-        <FontAwesomeIcon icon={faStop} />
+        <FontAwesomeIcon icon={faStopwatch} />
+        Stop
       </a>
     ),
   }));

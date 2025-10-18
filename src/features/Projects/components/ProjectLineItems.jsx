@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import {
   useGetTimeEntriesQuery,
   useStopTimerMutation,
-} from "../../shared/routes/timeEntriesApi";
-import { calculateTimeDifference } from "../../shared/utils/TimeConversion";
+} from "../../Shared/routes/timeEntriesApi";
+import { calculateTimeDifference } from "../../Shared/utils/timeConversion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStop } from "@fortawesome/free-solid-svg-icons";
-import DataTable from "../../shared/components/DataTable";
+import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import DataTable from "../../Shared/components/DataTable";
 
 export const ProjectLineItems = ({ projectId }) => {
   const { status, data = [], isLoading } = useGetTimeEntriesQuery(projectId);
@@ -31,15 +31,16 @@ export const ProjectLineItems = ({ projectId }) => {
     task: item.notes,
     startTime: new Date(item.startTime).toLocaleString(),
     endTime: item.endTime && new Date(item.endTime).toLocaleString(),
-    duration:
+    hours:
       item.endTime &&
-      calculateTimeDifference(item.startTime, new Date(item.endTime)).duration,
+      calculateTimeDifference(item.startTime, new Date(item.endTime)).hours,
     action: !item.endTime && (
       <a
         onClick={() => handleStop(item.id)}
-        className="text-red-600 hover:underline "
+        className="flex bg-red-900 hover:bg-red-900/50 text-white text-xs px-2 py-0.5 rounded-2xl cursor-pointer gap-2 items-center"
       >
-        <FontAwesomeIcon icon={faStop} />
+        <FontAwesomeIcon icon={faStopwatch} />
+        Stop
       </a>
     ),
   }));

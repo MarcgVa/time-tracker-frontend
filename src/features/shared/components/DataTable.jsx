@@ -11,40 +11,39 @@ import React, { Component } from 'react'
 export default function DataTable({columns=[], data=[],}) {
 
   return (
-    <div className="relative overflow-x-auto">
-      <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border border-gray-700 dark:border-gray-200">
-        <thead className="text-xs text-gray-900 uppercase bg-gray-400  dark:text-gray-600">
-          <tr>
-            {columns.map((col) => (
-              <th scope="col" className="px-6 py-3" key={col}>
-                {col}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="bg-gray-200 text-gray-600 ">
-          {data.map(
-            (row) => (
-              (
-                <tr
-                  key={row.key || row.id}
-                  className=""
+    <div className="relative w-full h-full border border-yellow-200  overflow-x-auto">
+      <div className='border-8 border-teal-300'>
+        <table className="grid grid-cols-4mx-auto my-auto ">
+          <thead className="">
+            <tr>
+              {columns?.map((col) => (
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-white/60 text-md font-light"
+                  key={col.id}
                 >
-                  {columns.map((col) => (
-                    <td
-                      scope="row"
-                      className="min-w-full flex-row justify-evenly px-6 py-4 font-medium text-gray-600 whitespace-nowrap"
-                      key={col}
-                    >
-                      {row[col]}
-                    </td>
-                  ))}
-                </tr>
-              )
-            )
-          )}
-        </tbody>
-      </table>
+                  {col.col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="grid grid-cols-4 @sm:grid-cols-4 bg-blue-900/30 gap-3 text-white text-sm text-center">
+            {data.map((row) => (
+              <tr key={row.key || row.name} className="flex ">
+                {columns?.map((col) => (
+                  <td
+                    scope="row"
+                    className="mb-2 px-6 py-4 font-light text-sm text-white bg-gray-900/90 whitespace-nowrap"
+                    key={col.id}
+                  >
+                    {row[col.id]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
   }

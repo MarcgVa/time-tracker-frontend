@@ -3,10 +3,13 @@ import {
   useGetProjectsQuery,
   useDeleteProjectMutation,
 } from "../routes/projectsApi";
-import { Card } from "../../shared/components/Card";
-import Button from "../../shared/components/Button";
+import { Card } from "../../Shared/components/Card";
+import Button from "../../Shared/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 export const ProjectCards = () => {
   const { status, data, isLoading } = useGetProjectsQuery();

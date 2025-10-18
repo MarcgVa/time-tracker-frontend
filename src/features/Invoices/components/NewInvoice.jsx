@@ -1,10 +1,10 @@
 import { useCreateInvoiceMutation } from "../routes/invoicesApi";
 import { useGetProjectsQuery } from "../../Projects/routes/projectsApi";
-import Button from "../../shared/components/Button";
+import Button from "../../Shared/components/Button";
 import {
   BOX_TITLE_STYLING,
   BOX_CONTAINER_STYLING,
-} from "../../shared/utils/commonStyles";
+} from "../../Shared/utils/commonStyles";
 import { useState, useEffect } from "react";
 
 export const NewInvoice = () => {

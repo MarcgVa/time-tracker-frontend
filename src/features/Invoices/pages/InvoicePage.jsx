@@ -1,4 +1,4 @@
-import PageTitle from "../../shared/components/PageTitle";
+import PageTitle from "../../Shared/components/PageTitle";
 import { NewInvoice } from "../components/NewInvoice";
 import { InvoiceList } from "../components/InvoiceList";
 

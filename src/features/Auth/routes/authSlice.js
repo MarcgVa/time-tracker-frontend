@@ -16,13 +16,15 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
-      window.sessionStorage.setItem('token',action.payload.token);
+      window.sessionStorage.setItem('token', action.payload.token);
+      window.sessionStorage.setItem('user', JSON.stringify(action.payload.user));
     },
     logout: (state) => {
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
       window.sessionStorage.removeItem('token');
+      window.sessionStorage.removeItem('user');
     },
   }, 
 });

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectCurrentUser, setCredentials } from "../routes/authSlice";
-import { validateEmail, passwordStrength } from "../../shared/utils/validation";
-import Button from "../../shared/components/Button";
+import { validateEmail, passwordStrength } from "../../Shared/utils/validation";
+import Button from "../../Shared/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
@@ -12,24 +11,20 @@ import {
   faLock,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import {useLoginMutation, useRegisterMutation } from '../routes/authApi'
-
-
-// Repeated stylings used on the component.
-const InputBoxStyle = "w-400px h-50px px-4 py-2 m-2 bg-transparent ";
-const InputContainerStyle =
-  "w-480px h-80px px-4 py-2 m-3 flex items-center gap-3 bg-gray-500";
-const ActiveTab = "text-white bg-blue-500 cursor-pointer grow py-1 text-center";
-const InactiveTab =
-  "text-gray-700 bg-gray-500 cursor-pointer grow py-1 text-center";
+import { useAuth } from "../hooks/useAuth";
+import {
+  ActiveTab,
+  InactiveTab,
+  InputBoxStyle,
+  InputContainerStyle,
+} from "../css/authStyles"; // Repeated styles used on this component.
+import { setCredentials } from "../routes/authSlice";
 
 export const LoginSignupForm = () => {
   const [action, setAction] = useState(
-    window.location.pathname === "/login" ? "Login" : "Sign Up"
+    window.location.pathname === "/login" ? "Login" : "signup"
   );
-  const [loginApi] = useLoginMutation();
-  const [registerApi] = useRegisterMutation();
-
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -41,12 +36,13 @@ export const LoginSignupForm = () => {
     password: "",
   });
 
+  // Only run validEmail values have been entered.
   const validEmail =
     formData.email.length > 0 ? validateEmail(formData.email) : true;
 
   useEffect(() => {
     if (token) {
-      navigate("/welcome");
+      navigate("/dashboard");
     }
   }, [token, navigate]);
 
@@ -61,12 +57,21 @@ export const LoginSignupForm = () => {
     e.preventDefault();
     console.log(formData);
     try {
-      const data =
-        action === "Login"
-          ? await loginApi(formData).unwrap()
-          : await registerApi(formData).unwrap();
-      dispatch(setCredentials(data));
-      navigate("/welcome");
+      let result = {};
+      switch (action.toLowerCase()) {
+        case "login":
+          result = await signIn(formData);
+          break;
+        case "signup":
+          result = await signUp(formData);
+          break;
+        default:
+          break;  
+      }
+      dispatch(setCredentials(result));
+      
+      console.log("results", result);
+      navigate("/dashboard");
     } catch (err) {
       console.error("Sign failed", err);
     }
@@ -84,17 +89,17 @@ export const LoginSignupForm = () => {
           </div>
 
           <div
-            className={action === "Sign Up" ? ActiveTab : InactiveTab}
-            onClick={() => setAction("Sign Up")}
+            className={action === "signup" ? ActiveTab : InactiveTab}
+            onClick={() => setAction("signup")}
           >
-            Sign Up
+            l signup
           </div>
         </div>
 
         <div className="relative flex flex-col mt-10">
           <form action={handleSubmit}>
             <div className="flex flex-col justify-center items-center mt-5">
-              {action === "Sign Up" ? (
+              {action === "signup" ? (
                 <div className={InputContainerStyle}>
                   <FontAwesomeIcon
                     icon={faUser}
@@ -111,7 +116,7 @@ export const LoginSignupForm = () => {
               ) : (
                 <div></div>
               )}
-              {action === "Sign Up" ? (
+              {action === "signup" ? (
                 <div className={InputContainerStyle}>
                   <FontAwesomeIcon
                     icon={faUser}
@@ -215,7 +220,7 @@ export const LoginSignupForm = () => {
               )}
               <div className="flex justify-evenly mt-6 mb-12">
                 <Button
-                  title={action === "Sign Up" ? "Sign up" : "Login"}
+                  title={action === "slgnup" ? "signup" : "Login"}
                   type="submit"
                   className="text-white bg-blue-500 px-12 py-2 cursor-pointer rounded-full"
                   onClick={handleSubmit}

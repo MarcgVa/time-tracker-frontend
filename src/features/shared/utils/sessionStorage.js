@@ -10,8 +10,11 @@ const setItem = (key, value) => {
 
 const getItem = (key) => {
   const item = window.sessionStorage.getItem(key);
-  console.log('item', item);
   return item ? item : undefined;
- };
+};
 
-export { setItem, getItem };
+const removeItem = (key) => {
+  return window.sessionStorage.removeItem(key);
+}
+
+export { setItem, getItem, removeItem };

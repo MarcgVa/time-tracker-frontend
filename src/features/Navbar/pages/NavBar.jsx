@@ -1,20 +1,26 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/img/logos/navbar-logo-dark.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../routes/logoutApi";
 import { clearInvoice } from "../../Invoices/routes/invoiceSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Dropdown } from "../components/Dropdown";
+import { logout, selectCurrentToken } from "../../Auth/routes/authSlice";
+import { getItem } from "../../Shared/utils/sessionStorage";
 
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const [logout] = useLogoutMutation();
+  const [logoutApi] = useLogoutMutation();
+  const token = getItem('token')
+  const accessToken = useSelector(selectCurrentToken);
+  console.log(accessToken);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logoutApi().unwrap();
     dispatch(clearInvoice());
+    dispatch(logout());
   };
   const dropDownMenuOptions = [
     {
@@ -35,6 +41,7 @@ export default function NavBar() {
     {
       id: "logout",
       title: "Logout",
+      to:"/home",
       action: handleLogout,
     },
   ];
@@ -43,7 +50,7 @@ export default function NavBar() {
     <header className="fixed top-0 left-0 right-0 z-999">
       <div className="w-full flex items-center px-10 space-y-2 bg-gray-950 shadow-md shadow-gray-600">
         <div className="">
-          <NavLink to="/">
+          <NavLink to="/home">
             <img
               src={logo}
               alt="Application Logo"
@@ -56,7 +63,7 @@ export default function NavBar() {
             <ul className="flex justify-between space-x-10 mx-10">
               <li>
                 <NavLink
-                  to="/"
+                  to={ token ? "/dashboard" : "/home"}
                   className={({ isActive }) =>
                     isActive ? "text-blue-400" : "text-gray-300"
                   }
@@ -108,12 +115,12 @@ export default function NavBar() {
                   key={menu.id}
                   className="p-2 cursor-pointer rounded-md text-xs"
                 >
-                  {menu.to ? (
-                    <a href={menu.to} className="hover:text-blue-400">
+                  {menu.action ? (
+                    <a onClick={menu.action} href={menu.to} className="hover:text-blue-400">
                       {menu.title}
                     </a>
                   ) : (
-                    <a onClick={menu.action} className="hover:text-blue-400">
+                    <a href={menu.to} className="hover:text-blue-400">
                       {menu.title}
                     </a>
                   )}

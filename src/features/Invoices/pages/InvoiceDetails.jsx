@@ -1,5 +1,5 @@
 import React from "react";
-import PageTitle from "../../shared/components/PageTitle";
+import PageTitle from "../../Shared/components/PageTitle";
 import { InvoiceLineItems } from "../components/InvoiceLineItems";
 import { InvoiceSummaryCard } from "../components/InvoiceSummaryCard";
 

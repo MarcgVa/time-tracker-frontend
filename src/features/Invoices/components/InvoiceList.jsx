@@ -6,9 +6,9 @@ import { useGetInvoicesQuery } from "../routes/invoicesApi";
 import {
   BOX_TITLE_STYLING,
   BOX_CONTAINER_STYLING,
-} from "../../shared/utils/commonStyles";
-import DataTable from "../../shared/components/DataTable";
-import Button from "../../shared/components/Button";
+} from "../../Shared/utils/commonStyles";
+import DataTable from "../../Shared/components/DataTable";
+import Button from "../../Shared/components/Button";
 
 export const InvoiceList = () => {
   const columns = ["projectName", "createdAt", "issuedAt", "total", "actions"];

@@ -7,7 +7,7 @@ import {
   faCommentDots,
   faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSendMessageMutation } from "../features/Users/routes/contactApi";
+import { useSendMessageMutation } from "../routes/contactApi";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({

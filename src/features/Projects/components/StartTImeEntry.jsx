@@ -1,15 +1,15 @@
 import { useState } from "react";
-import Button from "../../shared/components/Button";
+import Button from "../../Shared/components/Button";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import { useStartTimerMutation } from "../../shared/routes/timeEntriesApi";
+import { useStartTimerMutation } from "../../Shared/routes/timeEntriesApi";
 
 export const StartTimeEntry = () => {
   const [startTimerApi] = useStartTimerMutation();
   const [notes, setNotes] = useState("");
   const projectId = useParams().id;
-  
+
   const handleStart = async (e) => {
     e.preventDefault();
 
@@ -25,7 +25,7 @@ export const StartTimeEntry = () => {
       console.error(err);
     }
   };
- 
+
   return (
     <section className="flex justify-start items-center py-1 mt-12">
       <div className="flex flex-row justify-center items-center gap-2 py-4 mx:auto w-full">

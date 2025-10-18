@@ -8,12 +8,8 @@ import { setCredentials, logout } from "../routes/authSlice";
 import { api } from "../../../app/api";
 import { useState } from "react";
 
-
-
-
-
 const useAuth = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const { user, isAuthenticated, token } = useSelector((state) => state.auth);
   const [loginApi] = useLoginMutation();
@@ -25,7 +21,7 @@ const useAuth = () => {
   } = useGetUserQuery(undefined, {
     skip: !isAuthenticated, // Skip fetching user if not authenticated
   });
-  
+
   const signIn = async (credentials) => {
     try {
       const result = await loginApi(credentials).unwrap();
@@ -33,17 +29,17 @@ const useAuth = () => {
       return result;
     } catch (err) {
       if (!err?.originalStatus) {
-        setError('No Server Response');
+        setError("No Server Response");
       } else if (err.originalStatus?.status === 400) {
-        setError('Missing UserName or Password');
+        setError("Missing UserName or Password");
       } else if (err.originalStatus?.status === 401) {
-        setError('Unauthorized');
-      } else { 
-        setError('Login Failed');
+        setError("Unauthorized");
+      } else {
+        setError("Login Failed");
       }
     }
   };
-  
+
   const signUp = async (userData) => {
     try {
       const result = await registerApi(userData).unwrap();
@@ -61,13 +57,13 @@ const useAuth = () => {
       }
     }
   };
-  
+
   const signOut = () => {
     dispatch(logout());
     // Optionally, invalidate RTK Query cache for auth-related data
     dispatch(api.util.resetApiState());
   };
-  
+
   return {
     user: isAuthenticated ? userData || user : null, // Prefer fetched user data if available
     isAuthenticated,
@@ -79,6 +75,6 @@ const useAuth = () => {
     isUserError,
     error,
   };
-}
+};
 
-export {useAuth};
+export { useAuth };

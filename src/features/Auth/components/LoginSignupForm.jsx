@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateEmail, passwordStrength } from "../../shared/utils/validation";
-import Button from "../../shared/components/Button";
+import { validateEmail, passwordStrength } from "../../Shared/utils/validation";
+import Button from "../../Shared/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
@@ -11,11 +11,19 @@ import {
   faLock,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import {useAuth} from "../hooks/useAuth";
-import { ActiveTab, InactiveTab, InputBoxStyle, InputContainerStyle } from '../css/authStyles';// Repeated styles used on this component.
+import { useAuth } from "../hooks/useAuth";
+import {
+  ActiveTab,
+  InactiveTab,
+  InputBoxStyle,
+  InputContainerStyle,
+} from "../css/authStyles"; // Repeated styles used on this component.
+import { setCredentials } from "../routes/authSlice";
 
 export const LoginSignupForm = () => {
-  const [action, setAction] = useState( window.location.pathname === "/login" ? "Login" : "signup" );
+  const [action, setAction] = useState(
+    window.location.pathname === "/login" ? "Login" : "signup"
+  );
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +37,8 @@ export const LoginSignupForm = () => {
   });
 
   // Only run validEmail values have been entered.
-  const validEmail = formData.email.length > 0 ? validateEmail(formData.email) : true;
+  const validEmail =
+    formData.email.length > 0 ? validateEmail(formData.email) : true;
 
   useEffect(() => {
     if (token) {
@@ -57,9 +66,11 @@ export const LoginSignupForm = () => {
           result = await signUp(formData);
           break;
         default:
-          break;
+          break;  
       }
-      console.log('results', result);
+      dispatch(setCredentials(result));
+      
+      console.log("results", result);
       navigate("/dashboard");
     } catch (err) {
       console.error("Sign failed", err);
@@ -81,7 +92,7 @@ export const LoginSignupForm = () => {
             className={action === "signup" ? ActiveTab : InactiveTab}
             onClick={() => setAction("signup")}
           >
-  l         signup
+            l signup
           </div>
         </div>
 

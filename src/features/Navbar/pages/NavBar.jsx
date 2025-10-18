@@ -7,12 +7,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Dropdown } from "../components/Dropdown";
 import { logout, selectCurrentToken } from "../../Auth/routes/authSlice";
+import { getItem } from "../../Shared/utils/sessionStorage";
 
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const [logoutApi] = useLogoutMutation();
-  const token = useSelector(selectCurrentToken);
+  const token = getItem('token')
+  const accessToken = useSelector(selectCurrentToken);
+  console.log(accessToken);
 
   const handleLogout = async () => {
     await logoutApi().unwrap();

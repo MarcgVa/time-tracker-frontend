@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import {
   useGetTimeEntriesQuery,
   useStopTimerMutation,
-} from "../../shared/routes/timeEntriesApi";
-import { calculateTimeDifference } from "../../shared/utils/timeConversion";
+} from "../../Shared/routes/timeEntriesApi";
+import { calculateTimeDifference } from "../../Shared/utils/timeConversion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import DataTable from "../../shared/components/DataTable";
-
+import DataTable from "../../Shared/components/DataTable";
 
 export const ProjectLineItems = ({ projectId }) => {
   const { status, data = [], isLoading } = useGetTimeEntriesQuery(projectId);

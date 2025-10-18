@@ -1,4 +1,4 @@
-import { api } from '../../../app/api';
+import { api } from "../../../app/api";
 
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +11,7 @@ const authApi = api.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
     login: builder.mutation({
-      query: credentials => ({
+      query: (credentials) => ({
         url: "/auth/login",
         method: "POST",
         body: { ...credentials },
@@ -20,11 +20,12 @@ const authApi = api.injectEndpoints({
     }),
     getUser: builder.query({
       query: () => ({
-        url: '/me'
+        url: "/auth/me",
       }),
-      providesTags: ['Auth'],
+      providesTags: ["Auth"],
     }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useGetUserQuery } = authApi;
+export const { useRegisterMutation, useLoginMutation, useGetUserQuery } =
+  authApi;

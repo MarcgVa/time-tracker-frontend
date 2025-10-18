@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useGetInvoiceDetailsQuery } from "../routes/invoicesApi";
-import DataTable from "../../shared/components/DataTable";
+import DataTable from "../../Shared/components/DataTable";
 import {
   BOX_TITLE_STYLING,
   BOX_CONTAINER_STYLING,
-} from "../../shared/utils/commonStyles";
+} from "../../Shared/utils/commonStyles";
 import { useParams } from "react-router-dom";
-import { calculateTimeDifference } from "../../shared/utils/TimeConversion";
+import { calculateTimeDifference } from "../../Shared/utils/timeConversion";
 
 export const InvoiceLineItems = () => {
   const { id } = useParams();

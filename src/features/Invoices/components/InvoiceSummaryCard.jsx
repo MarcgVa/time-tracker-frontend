@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BOX_TITLE_STYLING } from "../../shared/utils/commonStyles";
+import { BOX_TITLE_STYLING } from "../../Shared/utils/commonStyles";
 
 export const InvoiceSummaryCard = () => {
   const { invoice } = useSelector((state) => state.invoice);

@@ -16,9 +16,11 @@ export default function ProjectDetailsPage() {
   }, [status, data]);
 
   return (
-    <div className="h-lvh max-h-lvh flex flex-col mt-12">
-      <StartTimeEntry projectId={id} />
-      <ProjectLineItems projectId={id} />
+    <div className="relative h-full w-full">
+      
+      <div>
+        <ProjectLineItems projectId={id} />
+      </div>
     </div>
   );
 }

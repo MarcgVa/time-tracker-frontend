@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StartTimeEntry } from "../../Projects/components/StartTImeEntry";
 import Button from "../../Shared/components/Button";
+import { Timer } from "../components/Timer";
 
 export const TimeEntry = () => {
   const [start, setStart] = useState(false);
@@ -11,17 +12,10 @@ export const TimeEntry = () => {
           Time Tracker
         </h1>
       </div>
-      <div className="mt-6 flex ">
-        <div>Timer Area</div>
+      <div className="mt-6 ml-6 flex ">
+        <div><Timer/></div>
         <div className="flex flex-col justify-end">
-          <div className="flex justify-end">
-            <Button
-              title={start ? "Stop" : "Start"}
-              className={`px-2 justify-end${
-                start ? "bg-red-950" : "bg-blue-500"
-              }`}
-            />
-          </div>
+          
           <div className="flex">
             Project and Task Area
 

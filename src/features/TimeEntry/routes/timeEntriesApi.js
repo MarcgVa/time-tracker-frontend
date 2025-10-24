@@ -6,9 +6,12 @@ export const timeEntriesApi = api.injectEndpoints({
       query: (id) => `/projects/${id}/times`,
       providesTags: ["TimeEntries"],
     }),
+    getDailyActivity: builder.query({
+      query: (id) => `/time/${id}/activity`
+    }),
     startTimer: builder.mutation({
       query: ({ projectId, notes }) => ({
-        url: `/projects/${projectId}/start`,
+        url: `/time/${projectId}/start`,
         method: "POST",
         body: { notes },
       }),
@@ -26,6 +29,7 @@ export const timeEntriesApi = api.injectEndpoints({
 
 export const {
   useGetTimeEntriesQuery,
+  useGetDailyActivityQuery,
   useStartTimerMutation,
   useStopTimerMutation,
 } = timeEntriesApi;

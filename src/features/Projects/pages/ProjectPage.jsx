@@ -91,8 +91,8 @@ export default function ProjectPage() {
             type="submit"
             className={
               !isModal
-                ? "absolute mx-auto right-5 top-5 px-2 py-1 bg-blue-600 text-sm text-white rounded-xl items-center text-center cursor-pointer z-10"
-                : "absolute mx-auto right-5 top-5 px-2 py-1 bg-green-600 text-sm text-white rounded-xl items-center text-center cursor-pointer z-10"
+                ? "absolute mx-auto right-5 top-5 px-2 py-1 bg-blue-600 text-xs text-white rounded-xl items-center text-center cursor-pointer z-10 sm:text-xs lg:text-sm"
+                : "absolute mx-auto right-5 top-5 px-2 py-1 bg-green-600 text-xs text-white rounded-xl items-center text-center cursor-pointer z-10 sm:text-xs lg:text-sm"
             }
             icon={
               <FontAwesomeIcon
@@ -104,7 +104,7 @@ export default function ProjectPage() {
           />
         </div>
       </div>
-      <div className="relative w-full h-full ">
+      <div className="relative w-full h-full mt-3">
         <Table data={projects} />
       </div>
     </div>

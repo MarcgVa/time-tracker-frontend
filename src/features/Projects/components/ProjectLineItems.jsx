@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   useGetTimeEntriesQuery,
   useStopTimerMutation,
-} from "../../Shared/routes/timeEntriesApi";
+} from "../../TimeEntry/routes/timeEntriesApi";
 import { calculateTimeDifference } from "../../Shared/utils/timeConversion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";

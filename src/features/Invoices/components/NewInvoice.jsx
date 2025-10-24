@@ -36,12 +36,12 @@ export const NewInvoice = () => {
   };
 
   return (
-    <div className="flex mt-10 min-h-10 flex-col justify-center px-6 lg:px-8">
-      <div className={BOX_CONTAINER_STYLING}>
-        <div className="w-full ">
-          <h2 className={BOX_TITLE_STYLING}>Create New Invoice</h2>
+    <div className="flex flex-col justify-start ml-2">
+      <div className="flex-col w-full">
+        <div className="w-full">
+          <h2 className="m-2 text-white text-xl font-bold tracking-wider pl-2">Pending</h2>
         </div>
-        <div className="mt-10 ">
+        <div className="">
           <ul className="mb-6 col-auto flex gap-3 flex-wrap px-5">
             {projects.length === 0 ? (
               <p>No new tasks to invoice.</p>
@@ -50,7 +50,7 @@ export const NewInvoice = () => {
                 <li key={p.id}>
                   <Button
                     onClick={() => handleCreate(p.id)}
-                    className="bg-blue-900 px-10 py-1.5 rounded-xl w-full mb-2 text-gray-300 hover:bg-blue-700 focus:outline-none focus:ring-2 mx-auto sm:mx-w-full sm:max-w-sm focus:ring-blue-500 focus:ring-offset-2 shrink-0"
+                    className="bg-blue-950 px-5 py-1.5 rounded-xl text-white/50 hover:bg-blue-700 focus:outline-none focus:ring-2 mx-auto sm:mx-w-full sm:max-w-sm focus:ring-blue-500 focus:ring-offset-2 shrink-0"
                     title={p.name}
                   />
                 </li>

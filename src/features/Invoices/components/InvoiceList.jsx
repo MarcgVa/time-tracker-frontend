@@ -9,6 +9,7 @@ import {
 } from "../../Shared/utils/commonStyles";
 import DataTable from "../../Shared/components/DataTable";
 import Button from "../../Shared/components/Button";
+import Table from "./Table";
 
 export const InvoiceList = () => {
   const columns = ["projectName", "createdAt", "issuedAt", "total", "actions"];
@@ -33,31 +34,27 @@ export const InvoiceList = () => {
     id: inv.id,
     total: `$${inv.total}`,
     projectName: inv.project.name,
+    status: inv.status,
     createdAt: new Date(inv.createdAt).toLocaleDateString(),
     issuedAt: new Date(inv.issuedAt).toLocaleDateString(),
     actions: (
       <Button
         title="View"
         type="button"
-        className="cursor-pointer px-5 py-1 rounded-xl bg-indigo-500 text-indigo-200"
+        className="cursor-pointer px-2 py-1 rounded-xl bg-blue-500 text-white/50"
         onClick={() => handleOnClick(inv)}
       />
     ),
   }));
 
   return (
-    <div className="flex min-h-10 flex-col justify-center px-6 lg:px-8">
-      <div className={BOX_CONTAINER_STYLING}>
-        <div className="mb-6">
-          <h2 className={BOX_TITLE_STYLING}>Existing Invoices</h2>
-        </div>
-        <div className="mt-5 p-2 rounded-lg">
-          {isLoading && invoices?.length == 0 ? (
-            <p>Loading invoices...</p>
-          ) : (
-            <DataTable columns={columns} data={invoiceList} />
-          )}
-        </div>
+    <div className="flex min-h-10 flex-col justify-center">
+      <div className="rounded-lg">
+        {isLoading && invoices?.length == 0 ? (
+          <p>Loading invoices...</p>
+        ) : (
+          <Table data={invoiceList} />
+        )}
       </div>
     </div>
   );

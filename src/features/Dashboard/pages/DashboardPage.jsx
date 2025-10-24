@@ -83,8 +83,8 @@ export default function DashboardPage() {
             ) : (
               <>
                 <StatCard
-                  title="Hours Tracked"
-                  value={`${data?.totalHours ?? 0} hrs`}
+                  title="Time Tracked"
+                  value={`${data?.totalHours ?? 0}`}
                   color="text-blue-400"
                 />
                 <StatCard

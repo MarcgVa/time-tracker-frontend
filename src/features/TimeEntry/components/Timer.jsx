@@ -5,7 +5,7 @@ import { Dropdown } from "./Dropdown";
 import {
   useGetProjectsQuery,
 } from "../../Projects/routes/projectsApi";
-import { ActivityList } from "./ActivityList";
+import {ActivityList}  from "./ActivityList";
 import { setProject } from "../routes/timeSlice";
 
 import { useRef } from "react";

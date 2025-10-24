@@ -21,6 +21,7 @@ const authApi = api.injectEndpoints({
     getUser: builder.query({
       query: () => ({
         url: "/auth/me",
+        method: "GET",
       }),
       providesTags: ["Auth"],
     }),

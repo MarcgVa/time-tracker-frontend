@@ -3,7 +3,7 @@ import Button from "../../Shared/components/Button";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import { useStartTimerMutation } from "../../Shared/routes/timeEntriesApi";
+import { useStartTimerMutation } from "../../TimeEntry/routes/timeEntriesApi";
 
 export const StartTimeEntry = () => {
   const [startTimerApi] = useStartTimerMutation();

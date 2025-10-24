@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useOnClickOutside } from "../../TimeEntry/hooks/useOnClickOutside";
+import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
 export const Dropdown = ({ title, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,9 +7,9 @@ export const Dropdown = ({ title, ...props }) => {
 
   useOnClickOutside(dropdownRef, () => setIsOpen(false));
   const toggleDropdown = () => {
-    console.log("setIsOpen");
+    console.log('setIsOpen');
     setIsOpen(!isOpen);
-  };
+  }
 
   return (
     <div ref={dropdownRef} className="absolute inline-block z-100">

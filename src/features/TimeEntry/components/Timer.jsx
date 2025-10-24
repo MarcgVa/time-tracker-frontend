@@ -1,109 +1,98 @@
-import React, {useEffect, useState} from "react";
-import Button from "../../Shared/components/Button";
-import { useStartTimerMutation, useStopTimerMutation } from "../../Shared/routes/timeEntriesApi";
-import {useGetProjectQuery, useGetProjectsQuery } from '../../Projects/routes/projectsApi'
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { Dropdown } from "./Dropdown";
+import {
+  useGetProjectsQuery,
+} from "../../Projects/routes/projectsApi";
+import { ActivityList } from "./ActivityList";
+import { setProject } from "../routes/timeSlice";
+
+import { useRef } from "react";
+import { Stopwatch } from "./Stopwatch";
+
+
 
 export const Timer = () => {
-  const [time, setTime] = useState(0)
-  const [isRunning, setIsRunning] = useState(false);
-  const [projects, setProjects] = useState({})
-  const [projId, setProjId] = useState({});
-  const [task, setTask] = useState('');
-  const [startTimer] = useStartTimerMutation();
-  const [stopTimer] = useStopTimerMutation();
+  const [task, setTask] = useState("");
+
+  const [selectedProject, setSelectedProject] = useState(sessionStorage.getItem('cp') || undefined );
+  const [projects, setProjects] = useState([]);
   const { status, data } = useGetProjectsQuery();
-  //const { status: projStatus, data: projData } = useGetProjectQuery(id);
-
-
-  const projectDropDownList = () => {
-    
-  };
-
-
-  const formatTime = (milliseconds) => {
-    const centiseconds = Math.floor((milliseconds / 10) % 100);
-    const seconds = Math.floor((milliseconds / 1000) % 60);
-    const minutes = Math.floor((seconds / 60) % 60);
-    const hours = Math.floor((minutes / 60) % 60);
-    return (
-      `${String(hours).padStart(2,'0')}:` +
-      `${String(minutes).padStart(2, '0')}:` +
-      `${String(seconds).padStart(2, '0')}:` +
-      `${String(centiseconds).padStart(2, '0')}`
-    );
-  }
-
-  const handleStart = async () => {
-    setIsRunning(true);
-    // e.preventDefault();
-
-    // const payload = {
-    //   projectId: projectId,
-    //   notes: notes,
-    // };
-    // try {
-    //   const entry = await startTimerApi(payload).unwrap();
-    //   console.log("entry", entry);
-    //   setNotes("");
-    // } catch (err) {
-    //   console.error(err);
-    // }
-  };
-
-
-  async function handleStop() {
-    setIsRunning(false);
-    //  await stopTimer(entryId).unwrap();
-    //  setEntryId(null);
-   }
-
+  const dispatch = useDispatch();
   
-  useEffect(() => {
-    let interval = null;
-    if (isRunning) { 
+  const handleSelectProject = (e) => {
+    setSelectedProject(e.target.value);
+    dispatch(setProject(selectedProject));
+  };
 
-      interval = setInterval(() => {
-        setTime(prevTime => prevTime += 10);
-      }, 10);
-    } else { 
-
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-    
-  },[isRunning])
+  const handleUpdateTask = (e) => {
+    setTask(e.target.value);
+  };
 
   useEffect(() => {
-    if (status === 'fulfilled') {
+    if (status === "fulfilled") {
       setProjects(data);
     }
-  },[status,projects])
+  }, [status, data]);
+  
+  useEffect(() => {
+    dispatch(setProject(undefined));
+  },[])
+
 
   return (
-    <div className="w-lg">
-      <div className="flex justify-between">
-        <div
-          className="flex p-3 text-center tracking-tight font-semibold
-                   size-40 justify-center items-center text-2xl  
-                        border-6 border-gray-500 rounded-full 
-                        "
-        >
-          <h1>{formatTime(time)}</h1>
+    <>
+      <section>
+        <div className="flex flex-col ">
+          <Stopwatch  />
+          <div className="w-lg flex justify-end relative">
+            <div className="w-55 flex flex-col justify-end">
+              <label htmlFor="project-select" className="mb-1">
+                Projects
+              </label>
+              <select
+                id="project-select"
+                value={selectedProject}
+                onChange={handleSelectProject}
+                className="flex bg-blue-900/20 p-3 rounded-lg"
+                required
+              >
+                <option
+                  value={""}
+                  className="flex text-xs px-3 py-1 font-light bg-blue-950/40 rounded-lg"
+                >
+                  Select a Project
+                </option>
+                {projects?.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="w-lg flex justify-end relative ">
+            <div className="flex flex-col justify-end mt-3 w-55">
+              <label htmlFor="notes" className="mt-2 mb-1">
+                Task
+              </label>
+              <input
+                id="notes"
+                type="text"
+                value={task}
+                onChange={handleUpdateTask}
+                className="px-3 py-2 bg-blue-950/40 rounded-lg"
+                required
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex items-start ">
-          <Button
-            title={isRunning ? "Stop" : "Start"}
-            className={`px-12 py-2 rounded-2xl ${
-              isRunning ? "bg-red-950" : "bg-blue-500"
-            }`}
-            onClick={isRunning ? handleStop : handleStart}
-          />
-        </div>
-      </div>
-      <div>
-
-      </div>
-    </div>
+      </section>
+      <section>
+        <ActivityList id={selectedProject} />
+      </section>
+    
+    </>
   );
 };
-;

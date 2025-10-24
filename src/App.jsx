@@ -14,7 +14,7 @@ import ContactPage from "./features/PublicPages/pages/ContactPage";
 import LoginSignupPage from "./features/Auth/pages/LoginSignupPage";
 import DashboardPage from "./features/Dashboard/pages/DashboardPage";
 import { AppLayout } from "./features/Shared/components/AppLayout";
-import { TimeEntry } from "./features/TimeEntry/pages/TimeEntry";
+import { TimeEntryPage } from "./features/TimeEntry/pages/TimeEntryPage";
 
 function App() {
   return (
@@ -50,7 +50,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/time" element={<ProtectedRoute />}>
-          <Route path="/time" element={<TimeEntry />} />
+          <Route path="/time" element={<TimeEntryPage />} />
         </Route>
       </Route>
     </Routes>

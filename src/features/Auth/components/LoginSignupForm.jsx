@@ -92,7 +92,7 @@ export const LoginSignupForm = () => {
             className={action === "signup" ? ActiveTab : InactiveTab}
             onClick={() => setAction("signup")}
           >
-            l signup
+            Signup
           </div>
         </div>
 
@@ -222,7 +222,7 @@ export const LoginSignupForm = () => {
                 <Button
                   title={action === "slgnup" ? "signup" : "Login"}
                   type="submit"
-                  className="text-white bg-blue-500 px-12 py-2 cursor-pointer rounded-full"
+                  className="text-white/90 bg-blue-500 px-12 py-2 cursor-pointer rounded-full"
                   onClick={handleSubmit}
                 />
               </div>

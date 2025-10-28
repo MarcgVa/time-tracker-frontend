@@ -19,6 +19,7 @@ export const Timer = ({ getSelectedProject, getTaskInfo }) => {
   };
 
   useEffect(() => {
+    dispatch(setProject(curProject));
     getSelectedProject(curProject);
     getTaskInfo(task);
   }, [curProject, getSelectedProject, task, getTaskInfo]);
@@ -30,7 +31,7 @@ export const Timer = ({ getSelectedProject, getTaskInfo }) => {
   }, [status, data]);
 
   useEffect(() => {
-    dispatch(setCurProject(undefined));
+    dispatch(setProject(undefined));
   }, []);
 
   return (

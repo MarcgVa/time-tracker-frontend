@@ -1,29 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-import { Dropdown } from "./Dropdown";
-import {
-  useGetProjectsQuery,
-} from "../../Projects/routes/projectsApi";
-import { ActivityList } from "./ActivityList";
+import { useGetProjectsQuery } from "../../Projects/routes/projectsApi";
 import { setProject } from "../routes/timeSlice";
 
-import { useRef } from "react";
-import { Stopwatch } from "./Stopwatch";
-
-
-
-export const Timer = () => {
+export const Timer = ({ getSelectedProject, getTaskInfo }) => {
   const [task, setTask] = useState("");
-
-  const [selectedProject, setSelectedProject] = useState(sessionStorage.getItem('cp') || undefined );
+  const [curProject, setCurProject] = useState();
   const [projects, setProjects] = useState([]);
   const { status, data } = useGetProjectsQuery();
   const dispatch = useDispatch();
-  
-  const handleSelectProject = (e) => {
-    setSelectedProject(e.target.value);
-    dispatch(setProject(selectedProject));
+
+  const handleSelection = (e) => {
+    setCurProject(e.target.value);
   };
 
   const handleUpdateTask = (e) => {
@@ -31,68 +19,63 @@ export const Timer = () => {
   };
 
   useEffect(() => {
+    dispatch(setProject(curProject));
+    getSelectedProject(curProject);
+    getTaskInfo(task);
+  }, [curProject, getSelectedProject, task, getTaskInfo]);
+
+  useEffect(() => {
     if (status === "fulfilled") {
       setProjects(data);
     }
   }, [status, data]);
-  
+
   useEffect(() => {
     dispatch(setProject(undefined));
-  },[])
-
+  }, []);
 
   return (
-    <>
-      <section>
-        <div className="flex flex-col ">
-          <Stopwatch  />
-          <div className="w-lg flex justify-end relative">
-            <div className="w-55 flex flex-col justify-end">
-              <label htmlFor="project-select" className="mb-1">
-                Projects
-              </label>
-              <select
-                id="project-select"
-                value={selectedProject}
-                onChange={handleSelectProject}
-                className="flex bg-blue-900/20 p-3 rounded-lg"
-                required
-              >
-                <option
-                  value={""}
-                  className="flex text-xs px-3 py-1 font-light bg-blue-950/40 rounded-lg"
-                >
-                  Select a Project
-                </option>
-                {projects?.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="w-lg flex justify-end relative ">
-            <div className="flex flex-col justify-end mt-3 w-55">
-              <label htmlFor="notes" className="mt-2 mb-1">
-                Task
-              </label>
-              <input
-                id="notes"
-                type="text"
-                value={task}
-                onChange={handleUpdateTask}
-                className="px-3 py-2 bg-blue-950/40 rounded-lg"
-                required
-              />
-            </div>
-          </div>
+    <section>
+      <div className="flex flex-col mt-5 ml-10 mr-30 gap-2 items-end">
+        <div className="flex flex-col w-75 ">
+          <label htmlFor="project-select" className="mb-1">
+            Projects
+          </label>
+          <select
+            id="project-select"
+            value={curProject}
+            onChange={handleSelection}
+            className="flex mt-2 bg-gray-700/60 p-3 rounded-lg"
+            required
+          >
+            <option
+              value={""}
+              className="flex text-xs px-3 py-1 font-light bg-gray-700/60 rounded-lg"
+            >
+              Select a Project
+            </option>
+            {projects?.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </section>
-      <section>
-        <ActivityList id={selectedProject} />
-      </section>
-    
-    </>
+
+        <div className="flex flex-col w-75">
+          <label htmlFor="notes" className="mt-2 mb-1">
+            Task
+          </label>
+          <input
+            id="notes"
+            type="text"
+            value={task}
+            onChange={handleUpdateTask}
+            className="px-3 py-2 bg-gray-700/60 rounded-lg"
+            required
+          />
+        </div>
+      </div>
+    </section>
   );
 };

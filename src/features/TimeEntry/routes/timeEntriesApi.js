@@ -10,8 +10,8 @@ export const timeEntriesApi = api.injectEndpoints({
       query: (id) => `/time/${id}/activity`
     }),
     startTimer: builder.mutation({
-      query: ({ projectId, notes }) => ({
-        url: `/time/${projectId}/start`,
+      query: ({ id, notes }) => ({
+        url: `/time/${id}/start`,
         method: "POST",
         body: { notes },
       }),

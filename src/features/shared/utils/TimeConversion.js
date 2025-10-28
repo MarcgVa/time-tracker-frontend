@@ -3,13 +3,18 @@ const calculateTimeDifference = (startDate, endDate) => {
   const endTime = new Date(endDate).getTime();
   const diffInMillis = endTime - startTime;
 
-  const seconds = Math.floor(diffInMillis / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
+  const numMillisInASecond = 1000;
+  const numMillisInAMinute = 60000;
+  const numMillisInAHour = 3600000;
+
+
+  const seconds = Math.floor((diffInMillis / numMillisInASecond)% 60);
+  const minutes = Math.floor((diffInMillis / numMillisInAMinute) % 60);
+  const hours = Math.floor((diffInMillis / numMillisInAHour) % 24);
   //const days = Math.floor(hours / 24);
 
   return {
-    hours: `${hours}.:${Math.floor(minutes % 60)}`
+    hours: `${hours}:${minutes}:${seconds}`
   };
 }
 

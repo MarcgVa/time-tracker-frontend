@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-import { Dropdown } from "./Dropdown";
 import { useGetProjectsQuery } from "../../Projects/routes/projectsApi";
-import { ActivityList } from "./ActivityList";
 import { setProject } from "../routes/timeSlice";
-
-import { useRef } from "react";
-import { Stopwatch } from "./Stopwatch";
 
 export const Timer = ({ getSelectedProject, getTaskInfo }) => {
   const [task, setTask] = useState("");
@@ -36,53 +30,51 @@ export const Timer = ({ getSelectedProject, getTaskInfo }) => {
   }, [status, data]);
 
   useEffect(() => {
-    dispatch(setProject(undefined));
+    dispatch(setCurProject(undefined));
   }, []);
 
   return (
-    <>
-      <section className="">
-        <div className="flex flex-col mt-10 ml-10 mr-10 gap-2">
-          <div className="flex flex-col w-75">
-            <label htmlFor="project-select" className="mb-1">
-              Projects
-            </label>
-            <select
-              id="project-select"
-              value={curProject}
-              onChange={handleSelection}
-              className="flex mt-2 bg-gray-700/60 p-3 rounded-lg"
-              required
+    <section>
+      <div className="flex flex-col mt-5 ml-10 mr-30 gap-2 items-end">
+        <div className="flex flex-col w-75 ">
+          <label htmlFor="project-select" className="mb-1">
+            Projects
+          </label>
+          <select
+            id="project-select"
+            value={curProject}
+            onChange={handleSelection}
+            className="flex mt-2 bg-gray-700/60 p-3 rounded-lg"
+            required
+          >
+            <option
+              value={""}
+              className="flex text-xs px-3 py-1 font-light bg-gray-700/60 rounded-lg"
             >
-              <option
-                value={""}
-                className="flex text-xs px-3 py-1 font-light bg-gray-700/60 rounded-lg"
-              >
-                Select a Project
+              Select a Project
+            </option>
+            {projects?.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
               </option>
-              {projects?.map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex flex-col w-75">
-            <label htmlFor="notes" className="mt-2 mb-1">
-              Task
-            </label>
-            <input
-              id="notes"
-              type="text"
-              value={task}
-              onChange={handleUpdateTask}
-              className="px-3 py-2 bg-gray-700/60 rounded-lg"
-              required
-            />
-          </div>
+            ))}
+          </select>
         </div>
-      </section>
-    </>
+
+        <div className="flex flex-col w-75">
+          <label htmlFor="notes" className="mt-2 mb-1">
+            Task
+          </label>
+          <input
+            id="notes"
+            type="text"
+            value={task}
+            onChange={handleUpdateTask}
+            className="px-3 py-2 bg-gray-700/60 rounded-lg"
+            required
+          />
+        </div>
+      </div>
+    </section>
   );
 };
